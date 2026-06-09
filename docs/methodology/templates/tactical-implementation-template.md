@@ -165,6 +165,17 @@ state the required sequence here.
 
 ---
 
+## Rollback and Reset Considerations
+
+```text
+If this implementation must be reversed, what is the rollback procedure?
+What data or schema changes cannot be cleanly reversed?
+What is the state of the system if the implementation is halted midway?
+If rollback is not applicable, state that explicitly with a reason.
+```
+
+---
+
 ## Known Risks
 
 ```text

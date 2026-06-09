@@ -93,6 +93,14 @@ Notes:
 Notes:
 ```
 
+### Examples
+
+```text
+[ ] updated  [ ] not applicable
+Notes:
+What examples, sample outputs, or usage guides reflect the as-built behavior?
+```
+
 ### Schema References
 
 ```text
@@ -172,6 +180,7 @@ Before closing this phase:
 [ ] critical and major findings remediated or accepted
 [ ] tests and UAT evidence exist and are recorded
 [ ] all documentation sections above are complete
+[ ] examples updated to reflect as-built behavior
 [ ] traceability matrix updated
 [ ] deferred items tracked
 [ ] known limitations documented

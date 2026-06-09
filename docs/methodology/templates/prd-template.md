@@ -47,9 +47,9 @@ open        — pending a decision before status can be assigned
 
 ## Functional Requirements
 
-| ID | Requirement | Acceptance Criteria | Status | Notes |
-| --- | --- | --- | --- | --- |
-| REQ-001 |  |  | baseline |  |
+| ID | Requirement | Acceptance Criteria | Testability Notes | Status | Notes |
+| --- | --- | --- | --- | --- | --- |
+| REQ-001 |  |  |  | baseline |  |
 
 Rules:
 
@@ -78,7 +78,8 @@ do not combine multiple requirements in one row
 
 ```text
 Describe the main paths a user takes through the system.
-Use numbered steps. Identify the actor at each step.
+Use numbered steps.
+Every step must name the actor: user, system, agent, operator, or external service.
 Do not describe UI implementation.
 ```
 

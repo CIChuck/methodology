@@ -102,6 +102,7 @@ What required tests are absent or insufficient?
 [ ] critical findings: none remaining
 [ ] major findings: remediated or explicitly accepted with documented rationale
 [ ] tests were added or updated
+[ ] deferred features confirmed not accidentally executable
 [ ] known deviations from the directive are documented
 ```
 

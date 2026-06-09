@@ -162,6 +162,7 @@ What evidence must exist to close this phase?
 ```
 
 ```text
+[ ] required fixtures created and verified
 [ ] unit tests pass
 [ ] integration tests pass
 [ ] negative tests pass

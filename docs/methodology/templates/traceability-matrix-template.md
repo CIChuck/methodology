@@ -33,9 +33,9 @@ blocked      — cannot proceed; dependency unresolved
 
 ## Matrix
 
-| Req ID | Requirement | Source | Architecture Rule | Build Item | Tactical Task | Implementation | Test / UAT Evidence | Status | Notes |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| REQ-001 |  |  |  |  |  |  |  | planned |  |
+| Req ID | Requirement | Source | Architecture Rule | Build Item | Tactical Task | Implementation | Test / UAT Evidence | Review Confirmation | Status | Notes |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| REQ-001 |  |  |  |  |  |  |  |  | planned |  |
 
 ---
 

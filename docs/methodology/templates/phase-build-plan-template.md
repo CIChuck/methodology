@@ -152,6 +152,21 @@ List test data, environment conditions, or infrastructure required for testing.
 
 ---
 
+## CLI and UAT Strategy
+
+```text
+If this phase exposes CLI commands, API endpoints, or user-observable behavior,
+define how those surfaces will be verified.
+This is distinct from automated tests — it is the human-executable acceptance surface.
+If not applicable, mark this section N/A with a reason.
+```
+
+| Scenario | Actor | Steps | Expected Output |
+| --- | --- | --- | --- |
+|  |  |  |  |
+
+---
+
 ## Acceptance Criteria
 
 ```text
@@ -207,6 +222,7 @@ Before proceeding to tactical planning:
 [ ] deferred items have reasons
 [ ] workstreams are defined
 [ ] tests are planned for each workstream
+[ ] CLI/UAT strategy defined or marked N/A
 [ ] migration plan exists if applicable
 [ ] acceptance criteria are verifiable
 [ ] documentation close-out requirements are defined

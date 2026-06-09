@@ -291,6 +291,23 @@ Every major architecture rule must trace to one or more PRD requirements.
 
 ---
 
+## Acceptance Criteria Seed
+
+```text
+Tests are design artifacts — they must be seeded during architecture, not after code generation.
+What tests will eventually prove this architecture is correctly implemented?
+List them here. They become the starting point for the Test and UAT Plan.
+```
+
+```text
+What unit behavior must be verifiable?
+What integration points must be testable?
+What security boundaries require negative tests?
+What state transitions require assertion?
+```
+
+---
+
 ## Accuracy Pass
 
 Before marking this document Accepted, perform an accuracy pass.

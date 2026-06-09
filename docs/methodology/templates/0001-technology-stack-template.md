@@ -146,6 +146,12 @@ What substitutions are not permitted without a new ADR?
 What dependencies are explicitly prohibited?
 ```
 
+```text
+Deviations from this stack require a new ADR.
+No substitution is valid until the superseding ADR status is Accepted.
+Verbal or chat-based approvals are not sufficient.
+```
+
 ---
 
 ## Quality Gate Commands

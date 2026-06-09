@@ -61,11 +61,13 @@ What is each role explicitly forbidden from doing?
 ```text
 What checks must occur before an action is permitted?
 Authorization rules must be testable.
+Every authorization rule requires a corresponding negative test.
+A negative test verifies that the action is denied when authorization is absent or invalid.
 ```
 
-| Action | Required Authorization | Test |
-| --- | --- | --- |
-|  |  |  |
+| Action | Required Authorization | Positive Test | Negative Test |
+| --- | --- | --- | --- |
+|  |  |  |  |
 
 ---
 
