@@ -1,0 +1,36 @@
+project:
+  name: "[Project Name]"
+  slug: "[project-slug]"
+  status: initialized
+  current_gate: G1
+  methodology_version: baseline
+  initialized_on: "[YYYY-MM-DD]"
+
+human_control:
+  owner: TBD
+  approver: TBD
+  deployment_approver: TBD
+
+authority:
+  constitution: docs/methodology/constitution/gendev.md
+  workflow: docs/methodology/guides/agentic-development-workflow.md
+  gates: docs/methodology/guides/gates.md
+  vision: docs/project/vision/[project-slug]-vision.md
+  prd: docs/project/prd/[project-slug]-prd.md
+  architecture: docs/project/architecture/[project-slug]-architecture.md
+  governance_security: docs/project/security-governance/governance-security-spec.md
+  traceability: docs/project/traceability/[project-slug]-traceability-matrix.md
+
+phase:
+  current: 1
+  status: planning
+  roadmap: docs/project/build-plan/phase-roadmap.md
+  build_plan: docs/project/build-plan/phases/phase-1-build-plan.md
+  tactical_plan: docs/project/build-plan/phases/phase-1-tactical-implementation-plan.md
+  construction_directive: docs/project/build-plan/phases/phase-1-construction-directive.md
+  test_uat_plan: docs/project/testing/phase-1-test-uat-plan.md
+  code_review: docs/project/build-plan/phases/phase-1-code-review.md
+  as_built_closeout: docs/project/as-built/phase-1-as-built-closeout.md
+
+notes:
+  examples_are_non_authoritative: true

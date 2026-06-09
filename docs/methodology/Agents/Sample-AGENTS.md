@@ -1,64 +1,185 @@
 # Repository Guidelines
 
+Use this file as a starting point for a product repository `AGENTS.md`. Replace bracketed
+placeholders and project-specific commands after initialization.
+
+## Repository Role
+
+This repository contains an AI-assisted product development project governed by the local
+methodology baseline. Agents collaborate with a human team member to envision, specify, design,
+build, test, review, remediate, document, and deploy the product.
+
+Do not treat chat history as build authority when methodology or active project documents apply.
+
 ## Methodology Authority
 
-Follow `docs/methodology/constitution/gendev.md` for
-documentation-first development, traceability, phase boundaries, test planning, and as-built
-close-out. 
+Follow `docs/methodology/constitution/gendev.md` for documentation-first development,
+traceability, phase boundaries, test planning, review, remediation, and as-built close-out.
 
-When creating or revising project documents, use the relevant local skill in
-`docs/methodology/dev-skills/`, for example `vision-framing.md`, `prd-author.md`,
-`architecture-spec-author.md`, `phase-build-planner.md`, `tactical-implementation-planner.md`,
-`ai-construction-directive-builder.md`, `governance-security-spec.md`, or
-`traceability-matrix.md`. 
+When creating or revising project documents, use the relevant guidance in
+`docs/methodology/dev-skills/`:
 
-The canonical project security and governance authority is
-`docs/project/security-governance/governance-security-spec.md`. Do not treat chat history as build
-authority when a methodology or skill document applies.
+- `vision-framing.md`
+- `prd-author.md`
+- `architecture-spec-author.md`
+- `governance-security-spec.md`
+- `phase-build-planner.md`
+- `tactical-implementation-planner.md`
+- `ai-construction-directive-builder.md`
+- `code-conformance-reviewer.md`
+- `remediation-closeout.md`
+- `traceability-matrix.md`
 
-# Security & Configuration Tips
+Use reusable templates from `docs/methodology/templates/`.
 
-secrets, retention, audit, or lifecycle movement must conform to
-`docs/project/security-governance/governance-security-spec.md`.
+Use lifecycle guides from `docs/methodology/guides/` and role playbooks from
+`docs/methodology/Agents/roles/`.
 
-#  Commit & Pull Request Guidelines
+## Active Project Authority
 
-This repository has little commit history, so use concise imperative commit messages such as
-`Add OCR client scaffold`. Pull requests should describe the changed pipeline stage, list tests
-run, call out PHI/security implications, and mention any config or dependency changes.
+Active project authority belongs under `docs/project/`.
 
-# For Python   
-Build, Test, and Development Commands
+Expected structure:
 
-Use `uv` for dependency and environment management.
-
-```bash
-uv sync --all-extras
-uv run benecard-pa --config config/app.example.yaml config-check
-uv run benecard-pa --config config/app.example.yaml init-db
-uv run pytest
-uv run ruff check .
+```text
+docs/project/vision/
+docs/project/prd/
+docs/project/architecture/
+docs/project/security-governance/
+docs/project/decisions/
+docs/project/build-plan/
+docs/project/build-plan/phases/
+docs/project/testing/
+docs/project/traceability/
+docs/project/as-built/
 ```
 
-Use `uv add <package>` for new Python dependencies. Do not use `pip install` to mutate this
-project environment. PDF parsing is based on PyMuPDF. OCR uses the macOS/system `tesseract`
-binary plus the Python `pytesseract` wrapper.
+The project manifest should live at:
 
-## Coding Style & Naming Conventions
+```text
+docs/project/project.yaml
+```
 
-Target Python `3.13`. Use 4-space indentation, type annotations for public boundaries, and
-small modules with clear responsibility. Prefer dataclasses or typed models for structured data.
-Keep PHI-sensitive paths explicit in names, for example `source_path`, `processed_path`, and
-`failed_path`. Ruff is the linting tool; keep code passing `uv run ruff check .`.
+If `docs/project/` does not exist, initialize it before product implementation:
+
+```bash
+./scripts/init-project.sh "[Project Name]"
+```
+
+## Authority Precedence
+
+Unless the active project defines a different order, use this precedence:
+
+1. `docs/methodology/constitution/gendev.md`
+2. `docs/project/security-governance/`
+3. `docs/project/architecture/`
+4. `docs/project/prd/`
+5. `docs/project/build-plan/`
+6. `docs/project/build-plan/phases/`
+7. `docs/project/testing/`
+8. `docs/project/traceability/`
+9. Current user instruction, only within documented scope
+
+If a request changes scope, architecture, governance/security behavior, acceptance criteria, or
+phase boundaries, update the relevant authority document before implementation.
+
+## Build, Test, And Development Commands
+
+Replace this section with project-specific commands after the technology stack is accepted in
+`docs/project/decisions/0001-technology-stack.md`.
+
+Common command categories to define:
+
+```bash
+# install dependencies
+[package-manager] install
+
+# lint
+[lint-command]
+
+# typecheck
+[typecheck-command]
+
+# unit/integration tests
+[test-command]
+
+# build
+[build-command]
+
+# user acceptance or smoke test
+[uat-command]
+```
+
+Do not invent verification commands. If commands are missing, update the phase plan or tactical
+implementation plan before claiming verification.
+
+## Coding Style And Scope
+
+Follow the active architecture specification and technology stack decision.
+
+Implementation must preserve:
+
+- documented file/module ownership;
+- phase scope and non-goals;
+- deferred-feature boundaries;
+- schema and migration instructions;
+- security and governance rules;
+- test and UAT expectations;
+- documentation close-out requirements.
+
+Do not remove unrelated code, silently broaden scope, weaken security checks, or mark planned
+behavior as implemented without evidence.
 
 ## Testing Guidelines
 
-Tests use `pytest` and should be named `tests/test_*.py`. Add focused tests for config parsing,
-file lifecycle behavior, idempotency, SQLite persistence, schema validation, OCR routing, and LLM
-client boundaries. Files in `docs/project/reference/clinical-samples/` are approved non-PHI
-clinical reference samples and may be used for unit, integration, and UAT fixtures. New fixtures
-must be generated synthetic files, formally de-identified files, or explicitly approved non-PHI
-reference samples; never commit patient identifiers, extracted PHI, or LLM responses containing PHI.
-This project uses the CLI as the primary phase-exit UAT and systems-integration harness; follow
-`docs/project/testing/cli-uat-harness.md` when adding user-observable phase behavior.
+Tests should trace to active requirements, architecture rules, or review findings.
 
+Each phase plan or tactical implementation plan should identify:
+
+- required unit tests;
+- integration tests;
+- negative tests;
+- security/governance tests;
+- migration tests;
+- CLI/API/UAT checks, if applicable;
+- fixtures and expected outputs;
+- manual verification steps when automation is not practical.
+
+Skipped verification must be reported with a concrete reason.
+
+## Security And Governance
+
+Any behavior involving users, agents, tools, automation, external APIs, file access, secrets,
+persistent state, sensitive data, deployment, or irreversible side effects must conform to the
+active governance/security specification under `docs/project/security-governance/`.
+
+Security-sensitive requirements need positive and negative tests.
+
+## Examples
+
+Example artifacts may exist under `docs/examples/`. They are reference material only. Do not use
+their implementation evidence, source paths, tests, CLI commands, or traceability statuses as local
+project evidence unless the active project explicitly adopts them and matching implementation files
+exist.
+
+## Methodology Checks
+
+Run the checker at major lifecycle transitions:
+
+```bash
+./scripts/check-methodology.sh
+```
+
+If the checker reports a missing `docs/project/`, initialize the active project before
+implementation.
+
+## Close-Out
+
+A phase is not done until:
+
+- required tests and UAT evidence are recorded;
+- code review is complete or findings are tracked;
+- remediation is complete or explicitly accepted;
+- as-built documentation reflects what was actually built;
+- the traceability matrix is updated;
+- deferred items and known limitations are current.
