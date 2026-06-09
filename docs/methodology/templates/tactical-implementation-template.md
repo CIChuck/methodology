@@ -183,8 +183,8 @@ What implementation risks remain?
 What could cause this plan to fail?
 ```
 
-| Risk | Likelihood | Mitigation |
-| --- | --- | --- |
+| Risk | Likelihood | Impact | Mitigation |
+| --- | --- | --- | --- |
 |  |  |  |
 
 ---

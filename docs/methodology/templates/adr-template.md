@@ -9,6 +9,19 @@ Superseded by: —
 
 ---
 
+## Completion Standard
+
+This record is complete when:
+
+```text
+the decision is stated, the rationale is documented,
+alternatives are recorded, and consequences are explicit
+```
+
+Do not mark Accepted until all sections are complete.
+
+---
+
 ## Context
 
 ```text

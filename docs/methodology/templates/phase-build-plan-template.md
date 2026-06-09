@@ -129,6 +129,7 @@ Does this phase change existing behavior, schemas, APIs, or data?
 What must remain compatible?
 What must be migrated?
 What is the rollback plan if the migration fails?
+If not applicable, mark this section N/A with a reason.
 ```
 
 ---

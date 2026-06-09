@@ -23,6 +23,22 @@ No implementation tooling may be initialized until this ADR is Accepted.
 
 ---
 
+## Completion Standard
+
+This record is complete when:
+
+```text
+every stack concern has a documented decision and rationale,
+alternatives considered are recorded,
+consequences are explicit,
+and quality gate commands are defined
+```
+
+Do not mark Accepted until all sections are complete and the architecture
+specification Technology Stack section references this ADR.
+
+---
+
 ## Context
 
 ```text

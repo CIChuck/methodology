@@ -2,6 +2,7 @@
 
 Status: Draft | Complete
 Date:
+Owner:
 Reviewer:
 Authority: `docs/methodology/constitution/gendev.md` — Rule 7: Code Review Verifies Conformance
 Source:

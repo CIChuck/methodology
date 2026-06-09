@@ -250,7 +250,7 @@ What architecture decisions have been explicitly deferred?
 Each item must have a reason and a suggested future phase.
 ```
 
-| Decision | Reason Deferred | Phase |
+| Decision | Reason Deferred | Target Phase |
 | --- | --- | --- |
 |  |  |  |
 

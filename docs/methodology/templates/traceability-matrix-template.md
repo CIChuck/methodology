@@ -18,6 +18,16 @@ This document is updated at the close of each phase.
 
 ---
 
+## Completion Standard
+
+This document is complete when:
+
+```text
+major requirements have visible implementation and verification evidence
+```
+
+---
+
 ## Status Values
 
 ```text

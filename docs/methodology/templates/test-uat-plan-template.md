@@ -99,6 +99,7 @@ Authorization rules must have negative tests.
 If this phase includes schema or data migrations:
 What must be verified before and after migration?
 What is the rollback verification?
+If not applicable, mark this section N/A with a reason.
 ```
 
 ---
@@ -151,6 +152,24 @@ Commands that must pass for the phase to be accepted.
 
 ```bash
 # Replace with project-specific commands
+```
+
+---
+
+## Accuracy Pass
+
+Before marking this document Accepted, perform an accuracy pass.
+
+Check for:
+
+```text
+[ ] test cases that do not map to a requirement or architecture rule
+[ ] negative tests absent for any authorization or validation rule
+[ ] security tests missing for any security requirement
+[ ] required fixtures not listed in test infrastructure
+[ ] UAT scenarios with no expected output
+[ ] coverage gaps without explicit justification
+[ ] migration tests absent when this phase includes schema changes
 ```
 
 ---

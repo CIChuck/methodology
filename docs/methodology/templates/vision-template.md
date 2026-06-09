@@ -146,6 +146,23 @@ What must be answered before a PRD can be written?
 
 ---
 
+## Accuracy Pass
+
+Before marking this document Accepted, perform an accuracy pass.
+
+Check for:
+
+```text
+[ ] problem statement that describes a solution instead of a problem
+[ ] success criteria that cannot be measured
+[ ] non-goals that are actually in scope
+[ ] assumptions that are stated as facts
+[ ] risks with no mitigation
+[ ] open questions with no owner
+```
+
+---
+
 ## Gate 1 Exit Checklist
 
 Before proceeding to PRD:
