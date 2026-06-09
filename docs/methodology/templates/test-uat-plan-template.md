@@ -1,0 +1,172 @@
+# Test and UAT Plan: [Project Name] — Phase [N]: [Phase Name]
+
+Status: Draft | Accepted | Superseded
+Date:
+Owner:
+Authority: `docs/methodology/constitution/gendev.md` — Test and UAT Plan
+Source:
+  Tactical Plan: `docs/project/build-plan/phases/[tactical-plan].md`
+  PRD: `docs/project/prd/[prd-document].md`
+  Architecture: `docs/project/architecture/[architecture-document].md`
+
+---
+
+## Completion Standard
+
+This document is complete when:
+
+```text
+the implementation can be accepted or rejected using documented evidence
+```
+
+---
+
+## Test Scope
+
+```text
+What is being tested in this phase?
+What is explicitly out of scope for testing in this phase?
+```
+
+---
+
+## Required Test Infrastructure
+
+```text
+What fixtures, test data, environment configuration,
+or external service stubs are required before testing can begin?
+```
+
+| Requirement | Type | Owner | Status |
+| --- | --- | --- | --- |
+|  |  |  |  |
+
+---
+
+## Unit Tests
+
+```text
+What units of behavior must be tested in isolation?
+```
+
+| Test ID | Component | Behavior Under Test | Expected Result | Fixture Required |
+| --- | --- | --- | --- | --- |
+| UT-001 |  |  |  |  |
+
+---
+
+## Integration Tests
+
+```text
+What interactions between components must be tested?
+```
+
+| Test ID | Components | Scenario | Expected Result | Fixture Required |
+| --- | --- | --- | --- | --- |
+| IT-001 |  |  |  |  |
+
+---
+
+## Negative Tests
+
+```text
+Negative tests are mandatory.
+What failure paths, invalid inputs, and boundary conditions must be tested?
+```
+
+| Test ID | Scenario | Input | Expected Failure Behavior |
+| --- | --- | --- | --- |
+| NT-001 |  |  |  |
+
+---
+
+## Security and Governance Tests
+
+```text
+What security and governance behaviors must be verified?
+Authorization rules must have negative tests.
+```
+
+| Test ID | Rule | Test Description | Expected Result |
+| --- | --- | --- | --- |
+| ST-001 |  |  |  |
+
+---
+
+## Migration Tests
+
+```text
+If this phase includes schema or data migrations:
+What must be verified before and after migration?
+What is the rollback verification?
+```
+
+---
+
+## CLI and UAT Scenarios
+
+```text
+What user-observable behaviors must be verified through the CLI or UI?
+These are the acceptance scenarios the operator will execute.
+```
+
+| Scenario ID | Description | Steps | Expected Output |
+| --- | --- | --- | --- |
+| UAT-001 |  |  |  |
+
+---
+
+## Manual Verification Steps
+
+```text
+What cannot be automated and must be verified by a human?
+Each manual step must have an explicit expected outcome.
+```
+
+| Step | Action | Expected Outcome | Verified By |
+| --- | --- | --- | --- |
+|  |  |  |  |
+
+---
+
+## Coverage Gaps
+
+```text
+What is not tested in this plan?
+Each gap must have an explicit justification.
+The absence of tests must be explicit and justified.
+```
+
+| Gap | Justification | Risk |
+| --- | --- | --- |
+|  |  |  |
+
+---
+
+## Verification Commands
+
+```text
+Commands that must pass for the phase to be accepted.
+```
+
+```bash
+# Replace with project-specific commands
+```
+
+---
+
+## Acceptance Evidence
+
+```text
+What evidence must exist to close this phase?
+```
+
+```text
+[ ] unit tests pass
+[ ] integration tests pass
+[ ] negative tests pass
+[ ] security tests pass
+[ ] UAT scenarios executed and documented
+[ ] coverage gaps justified
+[ ] verification commands output recorded
+```

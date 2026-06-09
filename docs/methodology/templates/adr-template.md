@@ -1,0 +1,110 @@
+# ADR-[NNNN]: [Decision Title]
+
+Status: Proposed | Accepted | Rejected | Superseded
+Date:
+Owner:
+Authority: `docs/methodology/constitution/gendev.md` — Rule 10: Decisions Must Be Durable
+Supersedes: —
+Superseded by: —
+
+---
+
+## Context
+
+```text
+What situation, constraint, or open question requires a decision?
+What forces are in tension?
+What happens if no decision is made?
+```
+
+---
+
+## Decision
+
+```text
+State the decision clearly and completely.
+One decision per ADR.
+```
+
+---
+
+## Rationale
+
+```text
+Why was this option chosen?
+What evidence or reasoning supports it?
+```
+
+---
+
+## Alternatives Considered
+
+| Alternative | Reason Rejected |
+| --- | --- |
+|  |  |
+
+---
+
+## Consequences
+
+### Positive
+
+```text
+What does this decision enable?
+```
+
+### Negative
+
+```text
+What constraints or costs does this decision introduce?
+```
+
+### Neutral
+
+```text
+What tradeoffs are accepted?
+```
+
+---
+
+## Scope Impact
+
+```text
+What changes in build scope follow from this decision?
+```
+
+---
+
+## Test Impact
+
+```text
+What test requirements follow from this decision?
+```
+
+---
+
+## Security and Governance Impact
+
+```text
+What security or governance implications follow from this decision?
+```
+
+---
+
+## Documentation Impact
+
+```text
+What other documents must be updated when this ADR is accepted?
+```
+
+---
+
+## Deferred Follow-Up
+
+```text
+What related decisions are being deferred?
+```
+
+| Decision | Reason Deferred | Target Phase |
+| --- | --- | --- |
+|  |  |  |

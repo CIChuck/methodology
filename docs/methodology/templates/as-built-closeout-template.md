@@ -1,0 +1,181 @@
+# As-Built Documentation Close-Out: [Project Name] — Phase [N]: [Phase Name]
+
+Status: Draft | Complete
+Date:
+Owner:
+Authority: `docs/methodology/constitution/gendev.md` — Rule 9: As-Built Documentation Is Definition of Done
+Source:
+  Tactical Plan: `docs/project/build-plan/phases/[tactical-plan].md`
+  Code Review Report: `docs/project/build-plan/phases/[review-report].md`
+
+---
+
+## Completion Standard
+
+This document is complete when:
+
+```text
+future developers can understand the actual system
+without relying on chat history
+```
+
+A phase is not done until this document is complete.
+
+---
+
+## Implemented Behavior
+
+```text
+What was actually built in this phase?
+Be precise. Do not describe planned behavior as implemented.
+```
+
+---
+
+## Deferred Behavior
+
+```text
+What was planned but not built?
+Where is each deferred item tracked?
+```
+
+| Item | Reason Not Implemented | Tracking Location |
+| --- | --- | --- |
+|  |  |  |
+
+---
+
+## Changed Assumptions
+
+```text
+What assumptions in the architecture, PRD, or phase plan proved incorrect?
+What was changed as a result?
+```
+
+---
+
+## Documentation Updated
+
+### Developer Guide
+
+```text
+[ ] updated  [ ] not applicable
+Notes:
+```
+
+### Architecture Specification
+
+```text
+[ ] updated  [ ] not applicable
+Notes:
+What changed from the planned architecture?
+```
+
+### PRD Status
+
+```text
+[ ] updated  [ ] not applicable
+Notes:
+Which requirements were implemented, deferred, or changed?
+```
+
+### CLI and API Documentation
+
+```text
+[ ] updated  [ ] not applicable
+Notes:
+```
+
+### Configuration Documentation
+
+```text
+[ ] updated  [ ] not applicable
+Notes:
+```
+
+### Schema References
+
+```text
+[ ] updated  [ ] not applicable
+Notes:
+```
+
+### Diagrams
+
+```text
+[ ] updated  [ ] not applicable
+Notes:
+```
+
+### Traceability Matrix
+
+```text
+[ ] updated  [ ] not applicable
+Notes:
+```
+
+### Deferred Feature Backlog
+
+```text
+[ ] updated  [ ] not applicable
+Notes:
+```
+
+---
+
+## Known Limitations
+
+```text
+What limitations exist in the implemented system?
+What will future phases need to account for?
+```
+
+---
+
+## Test Evidence
+
+```text
+What test results confirm the implementation is correct?
+```
+
+| Test Suite | Result | Date Run | Notes |
+| --- | --- | --- | --- |
+|  |  |  |  |
+
+Verification command output:
+
+```text
+Paste or link to verification command output.
+```
+
+---
+
+## As-Built Deviations
+
+```text
+Where did the implementation deviate from the tactical plan or construction directive?
+What was the reason for each deviation?
+```
+
+| Deviation | Reason | Impact | Documentation Updated |
+| --- | --- | --- | --- |
+|  |  |  |  |
+
+---
+
+## Gate 6 Exit Checklist
+
+Before closing this phase:
+
+```text
+[ ] code review completed
+[ ] critical and major findings remediated or accepted
+[ ] tests and UAT evidence exist and are recorded
+[ ] all documentation sections above are complete
+[ ] traceability matrix updated
+[ ] deferred items tracked
+[ ] known limitations documented
+[ ] as-built deviations documented
+```
+
+Phase is closed: Yes | No
