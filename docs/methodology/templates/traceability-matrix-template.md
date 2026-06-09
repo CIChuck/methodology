@@ -119,6 +119,24 @@ Requirements that cannot proceed due to unresolved dependencies.
 
 ---
 
+## Accuracy Pass
+
+Before updating this matrix at phase close, perform an accuracy pass.
+
+Check for:
+
+```text
+[ ] requirements marked verified without test or UAT evidence
+[ ] requirements marked verified without review confirmation
+[ ] implementation column referencing files that do not exist
+[ ] deferred requirements with no target phase
+[ ] blocked requirements with no owner or action
+[ ] tests without requirement coverage that are not accounted for
+[ ] coverage gaps that have not been justified or remediated
+```
+
+---
+
 ## Phase Update Log
 
 ```text

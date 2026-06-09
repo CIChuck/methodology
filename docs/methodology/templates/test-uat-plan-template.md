@@ -6,8 +6,9 @@ Owner:
 Authority: `docs/methodology/constitution/gendev.md` — Test and UAT Plan
 Source:
   Tactical Plan: `docs/project/build-plan/phases/[tactical-plan].md`
-  PRD: `docs/project/prd/[prd-document].md`
   Architecture: `docs/project/architecture/[architecture-document].md`
+  Governance/Security: `docs/project/security-governance/[governance-document].md`
+  PRD: `docs/project/prd/[prd-document].md`
 
 ---
 

@@ -232,6 +232,25 @@ When this ADR is Accepted:
 
 ---
 
+## Accuracy Pass
+
+Before marking this record Accepted, perform an accuracy pass.
+
+Check for:
+
+```text
+[ ] stack concerns with no documented decision
+[ ] decisions with no rationale
+[ ] alternatives table that is empty or perfunctory
+[ ] quality gate commands that are not project-specific
+[ ] test impact that does not name the test framework
+[ ] security impact that omits secrets management or credential handling
+[ ] documentation impact checklist items that are incomplete
+[ ] constraints section that does not name prohibited substitutions explicitly
+```
+
+---
+
 ## Deferred Follow-Up
 
 ```text

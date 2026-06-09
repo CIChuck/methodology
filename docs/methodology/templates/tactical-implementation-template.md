@@ -185,7 +185,7 @@ What could cause this plan to fail?
 
 | Risk | Likelihood | Impact | Mitigation |
 | --- | --- | --- | --- |
-|  |  |  |
+|  |  |  |  |  |
 
 ---
 

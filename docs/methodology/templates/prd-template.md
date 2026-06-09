@@ -64,13 +64,13 @@ do not combine multiple requirements in one row
 
 ## Non-Functional Requirements
 
-| ID | Category | Requirement | Acceptance Criteria | Status |
-| --- | --- | --- | --- | --- |
-| REQ-NF-001 | Performance |  |  | baseline |
-| REQ-NF-002 | Security |  |  | baseline |
-| REQ-NF-003 | Reliability |  |  | baseline |
-| REQ-NF-004 | Scalability |  |  | baseline |
-| REQ-NF-005 | Observability |  |  | baseline |
+| ID | Category | Requirement | Acceptance Criteria | Testability Notes | Status |
+| --- | --- | --- | --- | --- | --- |
+| REQ-NF-001 | Performance |  |  |  | baseline |
+| REQ-NF-002 | Security |  |  |  | baseline |
+| REQ-NF-003 | Reliability |  |  |  | baseline |
+| REQ-NF-004 | Scalability |  |  |  | baseline |
+| REQ-NF-005 | Observability |  |  |  | baseline |
 
 ---
 

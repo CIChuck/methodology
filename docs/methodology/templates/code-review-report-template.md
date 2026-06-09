@@ -2,15 +2,29 @@
 
 Status: Draft | Complete
 Date:
-Owner:
 Reviewer:
 Authority: `docs/methodology/constitution/gendev.md` — Rule 7: Code Review Verifies Conformance
 Source:
   Construction Directive: `docs/project/build-plan/phases/[directive].md`
   Tactical Plan: `docs/project/build-plan/phases/[tactical-plan].md`
   Architecture: `docs/project/architecture/[architecture-document].md`
-  PRD: `docs/project/prd/[prd-document].md`
   Governance/Security: `docs/project/security-governance/[governance-document].md`
+  PRD: `docs/project/prd/[prd-document].md`
+  Traceability Matrix: `docs/project/traceability/[traceability-matrix].md`
+
+---
+
+## Completion Standard
+
+This document is complete when:
+
+```text
+the team knows whether the implementation is conformant
+and what must be remediated
+```
+
+Do not mark Complete until all findings are categorized, residual risks are documented,
+and the Gate 5 checklist is satisfied.
 
 ---
 
@@ -93,6 +107,23 @@ What is not fully covered by the current test suite?
 
 ```text
 What required tests are absent or insufficient?
+```
+
+---
+
+## Accuracy Pass
+
+Before marking this document Complete, perform an accuracy pass.
+
+Check for:
+
+```text
+[ ] findings that reference the wrong requirement or architecture rule
+[ ] severity assignments that are inconsistent with impact
+[ ] residual risks that were not surfaced as findings
+[ ] testing gaps that require a finding but were not raised
+[ ] deferred feature leakage that was not flagged
+[ ] documentation drift that was not noted
 ```
 
 ---

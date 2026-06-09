@@ -193,7 +193,7 @@ What mitigations exist for each?
 Complete this section only if the system includes AI agents with tool use, autonomous execution, or side effects.
 
 ```text
-If not applicable, mark this section N/A.
+If not applicable, mark this section N/A with a reason.
 ```
 
 ### Agent Identity
@@ -246,6 +246,25 @@ Every security requirement must have a corresponding test.
 |  |  |  |
 
 Negative tests are required for all authorization rules.
+
+---
+
+## Completion Checklist
+
+Before marking this document Accepted:
+
+```text
+[ ] identity model covers all actors
+[ ] every actor has explicit permitted and forbidden actions
+[ ] every authorization rule has a positive test and a negative test
+[ ] audit model defines what is logged, where, and for how long
+[ ] secrets handling covers all credentials used by this system
+[ ] data sensitivity is classified with handling rules
+[ ] trust boundaries are explicit and validated
+[ ] threat scenarios have mitigations
+[ ] agentic section completed or marked N/A with reason
+[ ] every security requirement has a corresponding test
+```
 
 ---
 

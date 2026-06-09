@@ -171,6 +171,24 @@ What was the reason for each deviation?
 
 ---
 
+## Accuracy Pass
+
+Before marking this document Complete, perform an accuracy pass.
+
+Check for:
+
+```text
+[ ] implemented behavior described as planned but not actually built
+[ ] deferred items that are missing from the tracking location
+[ ] changed assumptions that were not propagated to architecture or PRD
+[ ] documentation sections marked updated but not actually reconciled
+[ ] test evidence that references a run that did not pass
+[ ] as-built deviations that lack a documented reason
+[ ] known limitations that affect future phases but are not noted
+```
+
+---
+
 ## Gate 6 Exit Checklist
 
 Before closing this phase:

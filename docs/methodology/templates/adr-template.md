@@ -112,6 +112,23 @@ What other documents must be updated when this ADR is accepted?
 
 ---
 
+## Accuracy Pass
+
+Before marking this record Accepted, perform an accuracy pass.
+
+Check for:
+
+```text
+[ ] decision that is ambiguous or could be interpreted more than one way
+[ ] rationale that asserts rather than reasons
+[ ] alternatives that were not genuinely considered
+[ ] consequences that are incomplete or understated
+[ ] scope, test, or security impacts that are missing
+[ ] documentation impact items that are not listed
+```
+
+---
+
 ## Deferred Follow-Up
 
 ```text
