@@ -1,7 +1,9 @@
 # GenDev Methodology Hardening Plan
 
-Status: Draft plan for review  
-Prepared: 2026-06-10  
+Status: Implemented through Wave 9
+Prepared: 2026-06-10
+Implemented: 2026-06-10
+Release identity: `0.1.0-baseline` (`v0.1.0-baseline` tag after release-prep merge)
 Scope: Hardening the GenDev methodology based on the assessment documents in `docs/assessment/`  
 Source assessments:
 
@@ -1424,57 +1426,46 @@ Each major wave should be validated against scenarios, not only file existence.
 The hardening effort is complete when:
 
 ```text
-[ ] Current methodology has a versioned release identity.
-[ ] Licensing is explicit.
-[ ] Gate-log events are structured and parseable.
-[ ] Approval records include a substantive checked statement.
-[ ] Evidence sampling is required at least once per phase.
-[ ] Authority/evidence templates include provenance headers.
-[ ] Construction directives are mandatory preserved build artifacts.
-[ ] Stale is a formal artifact status.
-[ ] Amendment and regression protocol exists and is referenced.
-[ ] Review independence is constitutional and present in review templates.
-[ ] Enforcement contract is ratified into methodology guides.
-[ ] Project template declares enforcement class and enforcement configuration.
-[ ] Checker validates gate/status values as errors.
-[ ] Checker validates structured approval records.
-[ ] Reference hook/CI binding exists or the methodology honestly says it is pending.
-[ ] G1 success criteria are measurable.
-[ ] Production protocol includes value review.
-[ ] Basic metrics can be computed from project records.
-[ ] Blast-radius classes define when ceremony may be reduced or must be increased.
-[ ] GenDev Lite example exists.
-[ ] Practitioner guide reflects all accepted terminology and workflow changes.
-[ ] Dry-run scenarios pass.
+[x] Current methodology has a versioned release identity.
+[x] Licensing is explicit.
+[x] Gate-log events are structured and parseable.
+[x] Approval records include a substantive checked statement.
+[x] Evidence sampling is required at least once per phase.
+[x] Authority/evidence templates include provenance headers.
+[x] Construction directives are mandatory preserved build artifacts.
+[x] Stale is a formal artifact status.
+[x] Amendment and regression protocol exists and is referenced.
+[x] Review independence is constitutional and present in review templates.
+[x] Enforcement contract is ratified into methodology guides.
+[x] Project template declares enforcement class and enforcement configuration.
+[x] Checker validates gate/status values as errors.
+[x] Checker validates structured approval records.
+[x] Reference hook/CI binding exists or the methodology honestly says it is pending.
+[x] G1 success criteria are measurable.
+[x] Production protocol includes value review.
+[x] Basic metrics can be computed from project records.
+[x] Blast-radius classes define when ceremony may be reduced or must be increased.
+[x] GenDev Lite example exists.
+[x] Practitioner guide reflects all accepted terminology and workflow changes.
+[x] Dry-run scenarios pass.
 ```
 
 ## 17. Recommended Immediate Next Step
 
-Start with Wave 0 and Wave 1.
-
-Rationale:
-
-- Wave 0 removes distracting repository issues and makes the baseline releasable.
-- Wave 1 creates the structured event substrate needed by enforcement and measurement.
-- Enforcement should not be ratified before gate-log data is parseable.
-- Provenance should follow immediately after because it enables amendment, staleness, and stronger
-  review claims.
-
-Recommended first branch:
+The hardening wave sequence is complete. The next release action is:
 
 ```text
-hardening/wave-0-baseline-hygiene
+merge the release-prep patch, tag master as v0.1.0-baseline, and use that tag as the hardened
+pre-1.0 clone baseline
 ```
 
-Recommended first implementation sequence:
+Recommended follow-up after tagging:
 
-1. Clean repository hygiene and licensing.
-2. Add methodology versioning policy.
-3. Create structured gate-log schema.
-4. Add `Checked` to approval records.
-5. Update checker to recognize structured records without requiring them yet.
-6. Dry-run project initialization.
-7. Review before moving to provenance.
+1. Run one real downstream project from a fresh clone.
+2. Record any practitioner friction as issues or assessment notes.
+3. Decide whether the next methodology release should be `0.2.0` or a `1.0.0` candidate.
+4. Keep `docs/assessment/` advisory unless new content is deliberately ratified into methodology
+   authority.
 
 ## 18. Notes On Ratifying The Assessment Documents
 

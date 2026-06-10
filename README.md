@@ -196,8 +196,18 @@ as its architecture and phase plans mature.
 
 Current methodology version: `0.1.0-baseline`
 
-This is a pre-1.0 baseline. The hardening plan in `docs/assessment/gendev-hardening-plan.md`
-identifies the work needed before a `1.0.0` methodology release.
+This is the hardened pre-1.0 baseline. The hardening waves in
+`docs/assessment/gendev-hardening-plan.md` are complete, and the release notes are in
+`docs/releases/0.1.0-baseline.md`.
+
+The release tag for this baseline is expected to be:
+
+```text
+v0.1.0-baseline
+```
+
+Reserve `1.0.0` for a later stable methodology release after the hardened baseline has been used in
+real initialized projects and any adoption feedback has been reconciled.
 
 ## License
 
