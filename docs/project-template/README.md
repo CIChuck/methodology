@@ -22,6 +22,7 @@ authority documents define the stack and implementation plan.
 - project identity and current gate;
 - human owner and approval fields;
 - collaboration mode and lead-agent fields;
+- blast-radius class, classification reason, and any combined-gate decisions;
 - authority document paths;
 - current phase paths;
 - current approval summary, including gate status, approver, evidence, risk acceptance, and next
@@ -32,6 +33,19 @@ authority documents define the stack and implementation plan.
 - example/non-authority notes.
 
 The manifest is a map and state summary, not a replacement for the documents it references.
+
+## Scaling Block
+
+The `scaling` block declares how much methodology ceremony the project needs:
+
+- `C1` for contained, low-risk, reversible internal work;
+- `C2` for ordinary product work;
+- `C3` for critical work involving regulated data, irreversible actions, external integrations,
+  agentic runtime behavior, or high operational impact.
+
+If the project combines gates, record each combination under `scaling.combined_gates` with the
+affected gates, justification, approver, date, and evidence path. Gate combination changes form,
+not required content.
 
 ## Approval Log
 

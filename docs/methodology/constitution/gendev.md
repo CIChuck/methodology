@@ -57,6 +57,40 @@ projects where traceability and testability matter
 
 This standard may be scaled down for small work, but the traceability chain should not be abandoned.
 
+## Blast-Radius Scaling Principle
+
+GenDev ceremony scales with the blast radius of the work. Blast radius means the plausible impact
+of a wrong requirement, bad implementation, unsafe deployment, missed review finding, or agent
+misstep.
+
+Every initialized project should declare a blast-radius class in `docs/project/project.yaml`:
+
+```text
+C1 Contained
+  Internal tools, reversible outputs, no sensitive data, low operational risk.
+
+C2 Standard
+  Default product work, moderate operational or data risk, ordinary production release discipline.
+
+C3 Critical
+  Regulated data, irreversible actions, external integrations, production-sensitive automation,
+  agentic runtime behavior, or high operational impact.
+```
+
+Scaling down is legitimate only when required content remains explicit. A C1 project may combine
+early gates or artifacts, but it must still define the problem, requirements, architecture
+assumptions, security assumptions, build plan, verification, approval, and close-out evidence.
+Scaling down does not waive production approval, rollback thinking, or security assumptions when
+the product is deployed or touches meaningful data.
+
+Scaling up is mandatory when exposure increases. A C3 project should not combine lifecycle gates.
+It should use stronger independent review, evidence sampling, explicit override discipline, and
+stricter enforcement than the baseline.
+
+Gate combination must be recorded with a justification, class, affected gates, preserved content,
+approver, and evidence path. If the justification is missing, the methodology treats the combined
+gate path as a process risk, not as an informal shortcut.
+
 ## Version-Control Assumption
 
 This methodology assumes a version control system with immutable revision identifiers, diffable

@@ -42,6 +42,12 @@ docs/examples/
   Non-authoritative examples and future worked examples.
 ```
 
+For a lightweight C1 path, see:
+
+```text
+docs/examples/gendev-lite-contained-tool/
+```
+
 ## Core Method
 
 The controlling standard is:
@@ -67,7 +73,9 @@ as-built close-out
 traceability update
 ```
 
-Small projects may combine artifacts, but the content still needs to exist.
+Small projects may combine artifacts when they are classified as contained C1 work, but the content
+still needs to exist. Default C2 product work should normally use the full chain. Critical C3 work
+should add review, evidence, and enforcement discipline rather than compressing gates.
 
 ## Initialize A Project
 

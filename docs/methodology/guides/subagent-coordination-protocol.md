@@ -33,6 +33,7 @@ The lead agent must:
 
 - define sub-agent assignments;
 - provide source authority;
+- state the expected effort budget;
 - state output format;
 - state non-goals;
 - collect outputs;
@@ -109,6 +110,32 @@ Avoid sub-agents when:
 - the lead agent cannot provide bounded instructions;
 - outputs would overload the human without improving decisions.
 
+## Budget And Cost Control
+
+Sub-agent work must have an explicit budget expectation. Budget may be stated as time, tokens,
+dollars, rough effort, number of passes, or another practical limit supported by the tool and team.
+
+Budget fields are not a substitute for judgment. They exist to prevent automated runaway
+delegation, hidden review cost, and broad sub-agent prompts that produce more material than the
+human can use.
+
+When a sub-agent assignment is likely to exceed budget, the lead agent should stop and surface:
+
+```text
+assignment
+budget expectation
+work completed
+remaining work
+risk of stopping
+recommendation
+human decision needed
+```
+
+C1 projects should normally use few or no sub-agents unless independent review would materially
+improve safety or clarity. C2 projects use sub-agents when scope or risk justifies them. C3
+projects should use stronger independent review and may assign multiple bounded reviewers, but each
+assignment still needs a budget.
+
 ## Standard Sub-Agent Assignment
 
 Use this shape:
@@ -120,6 +147,8 @@ Source authority:
 Scope:
 Non-goals:
 Questions to answer:
+Budget:
+Budget escalation:
 Output format:
 Stop conditions:
 ```

@@ -155,6 +155,9 @@ ready_for_approval_on: YYYY-MM-DD
 approval_requested_on: YYYY-MM-DD
 decided_on: YYYY-MM-DD
 enforcement_class: attested
+blast_radius_class: C2
+combined_gates: N/A
+combined_gate_justification: N/A
 artifact_status: Accepted
 evidence:
   - path: docs/project/vision/[project-slug]-vision.md
@@ -185,6 +188,9 @@ Before asking for gate approval, the lead agent should present:
 Gate:
 Artifact status:
 Evidence reviewed:
+Enforcement class:
+Blast-radius class:
+Combined gate justification, if applicable:
 Gate started on:
 Ready for approval on:
 Approval requested on:

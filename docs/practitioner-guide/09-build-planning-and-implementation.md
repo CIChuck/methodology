@@ -27,6 +27,15 @@ Build-ready usually means:
 This may look like a lot of ceremony. The point is to prevent implementation from becoming the
 place where requirements, architecture, security, and acceptance criteria are invented.
 
+For `C1` contained work, the build-ready authority may be compact. A single combined framing
+artifact can preserve vision, requirements, architecture assumptions, governance assumptions, and
+test expectations, and a short phase plan can define the implementation boundary. The agent still
+must not begin meaningful product code until the human has approved the build-ready boundary.
+
+For `C3` critical work, compact build-ready authority is usually inappropriate. The team should use
+separate artifacts, stronger independent review, explicit enforcement or attestation evidence, and
+clearer production/rollback decisions before implementation begins.
+
 If accepted authority changes during implementation, do not keep building as if the old authority
 still governs. Stop and use the amendment process. The current gate may hold while the PRD,
 architecture, tests, construction directive, or traceability are reconciled. If the change

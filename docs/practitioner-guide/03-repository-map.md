@@ -119,6 +119,7 @@ It records:
 - methodology authority paths;
 - collaboration mode;
 - active role;
+- blast-radius class and scaling decisions;
 - enforcement class (whether methodology controls are mechanically enforced or human-attested);
 - current approval status;
 - evidence paths;

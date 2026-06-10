@@ -34,6 +34,7 @@ From a prompt such as `Let's begin`, the lead agent should:
 [ ] read docs/project/project.yaml
 [ ] identify the current gate
 [ ] identify the current collaboration mode
+[ ] identify the blast-radius class
 [ ] confirm or request the human owner and gate approver
 [ ] identify the active role and artifact
 [ ] draft only the current-gate artifact
@@ -58,6 +59,8 @@ Before a gate is ready for approval, `docs/project/project.yaml` should identify
 [ ] required approver
 [ ] evidence path
 [ ] enforcement class
+[ ] blast-radius class
+[ ] combined-gate justification, if gates are combined
 [ ] known risks requiring acceptance or explicit N/A
 [ ] blocking open questions or explicit N/A
 [ ] next gate
@@ -74,6 +77,8 @@ Gate:
 Artifact status:
 Evidence reviewed:
 Enforcement class:
+Blast-radius class:
+Combined gate justification, if applicable:
 Attestation or enforcement evidence:
 Open questions:
 Known risks:
@@ -118,6 +123,8 @@ A dry run passes when:
 [ ] future-stage templates remain templates until their gate is active
 [ ] approval history is durable in docs/project/approvals/gate-log.md
 [ ] enforcement class is visible in docs/project/project.yaml
+[ ] blast-radius class is visible in docs/project/project.yaml
+[ ] combined gates have a recorded justification, if any
 [ ] next-step recommendations are concrete and gate-aware
 ```
 
@@ -131,6 +138,7 @@ Investigate the orchestration layer if a dry run:
 - fills PRD, architecture, build, or deployment artifacts as if accepted before their gate;
 - treats sub-agent output as authority without lead-agent reconciliation and human approval;
 - advances a gate without visible enforcement class or required attestation context;
+- combines gates without visible blast-radius class and justification;
 - treats `proceed` as production, security, or gate approval without an explicit record.
 
 ## Completion Standard

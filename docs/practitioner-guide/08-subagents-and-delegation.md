@@ -90,6 +90,25 @@ Avoid sub-agents when:
 - the lead agent cannot give bounded assignments;
 - the outputs would overwhelm the human without improving decisions.
 
+## Budget The Delegation
+
+Sub-agent budget means the explicit limit on how much effort a bounded sub-agent assignment should
+consume. The budget can be time, tokens, dollars, number of review passes, or rough effort. The
+exact unit depends on the tool and team. The point is to avoid runaway delegation and unreadable
+review output.
+
+Use fewer sub-agents for `C1` contained work. Use normal bounded review for `C2` work. Use stronger
+independent review for `C3` critical work, but still budget each assignment.
+
+Budget escalation means the condition where the lead agent must stop and ask the human whether to
+continue. Example escalation triggers:
+
+- the reviewer needs broader authority than provided;
+- the finding changes the blast-radius class;
+- the work appears to require another specialist reviewer;
+- the assignment is producing more output than the human can reasonably evaluate;
+- the budget has been reached and material risk remains unresolved.
+
 ## Assignment Format
 
 A good sub-agent assignment includes:
@@ -102,6 +121,8 @@ Context boundary:
 Scope:
 Non-goals:
 Questions to answer:
+Budget:
+Budget escalation:
 Output format:
 Stop conditions:
 ```
@@ -124,6 +145,9 @@ Source: PRD, architecture draft, stack ADR.
 Question: Identify boundary, lifecycle, data-model, and deferred-architecture gaps.
 Context boundary: Use only the listed documents and explicit questions. Do not use implementer
 session history.
+Budget: One concise pass per reviewer.
+Budget escalation: Stop and ask the human if a reviewer finds C3-level risk or needs a broader
+review scope.
 
 Wait for all outputs, then reconcile conflicts and return findings by severity.
 ```

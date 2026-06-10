@@ -383,7 +383,58 @@ Default progression:
 G0 -> G1 -> G2 -> G3 -> G4 -> G5 -> G6 -> G7 -> G8 -> G9
 ```
 
-Some projects may combine gates, but they must preserve the required content and human approvals.
+Some projects may combine gates, but they must preserve the required content, evidence, and human
+approvals.
+
+## Blast-Radius Scaling
+
+The project manifest declares the blast-radius class under `scaling.blast_radius_class`.
+
+```text
+C1 Contained
+  Internal tools, reversible outputs, no sensitive data, low operational risk.
+
+C2 Standard
+  Default product work, moderate operational or data risk, ordinary production release discipline.
+
+C3 Critical
+  Regulated data, irreversible actions, external integrations, production-sensitive automation,
+  agentic runtime behavior, or high operational impact.
+```
+
+Blast-radius class controls how much lifecycle ceremony may be compressed or must be expanded. It
+does not change the obligation to preserve durable authority, traceability, approval, and review
+evidence.
+
+| Class | Gate/artifact handling | Non-negotiables |
+| --- | --- | --- |
+| C1 Contained | G1-G4 may combine into one framing document if the required content exists. Per-phase planning and close-out may combine when implementation is small and reversible. | Build-ready approval, production approval if deployed, explicit architecture and security assumptions, verification evidence, as-built close-out. |
+| C2 Standard | Use the full default chain. Gates combine only with recorded justification and human approval. | G4, G5, G8, and G9 approval evidence; independent review for implementation acceptance; traceability and metrics records. |
+| C3 Critical | Do not combine gates. Expand review, evidence sampling, enforcement, and override discipline beyond the baseline. | Reviewer independence, evidence sampling at every major gate, strict production approval, explicit rollback or irreversibility decision, stricter override policy. |
+
+## Combined Gate Records
+
+Gate combination is allowed only when the project records the decision. Record the decision in
+`docs/project/project.yaml` under `scaling.combined_gates` and, when it changes authority or risk,
+also in `docs/project/approvals/gate-log.md` or a decision record.
+
+Recommended manifest shape:
+
+```yaml
+scaling:
+  blast_radius_class: C1
+  classification_reason: Internal reversible utility with no sensitive data.
+  combined_gates:
+    - gates: G1-G4
+      mode: combined_framing_document
+      justification: Small C1 utility; required vision, PRD, architecture, and security assumptions are preserved in one artifact.
+      approved_by: TBD
+      approved_on: TBD
+      evidence: docs/project/vision/[project-slug]-vision.md
+```
+
+The justification must explain why combination is appropriate, what content is preserved, and what
+approval still applies. A combined gate with no justification is not a valid shortcut.
 
 For small prototypes, G3 and G4 may be lightweight. They must still define architecture and security
 assumptions explicitly.

@@ -75,6 +75,9 @@ ready_for_approval_on: YYYY-MM-DD
 approval_requested_on: YYYY-MM-DD
 decided_on: YYYY-MM-DD
 enforcement_class: attested
+blast_radius_class: C2
+combined_gates: N/A
+combined_gate_justification: N/A
 artifact_status: Accepted
 evidence:
   - path: docs/project/vision/[project-slug]-vision.md
@@ -111,6 +114,8 @@ Artifact status:
 Evidence reviewed:
 Evidence revisions:
 Enforcement class:
+Blast-radius class:
+Combined gate justification, if applicable:
 Attestation or enforcement evidence:
 Open questions:
 Known risks:

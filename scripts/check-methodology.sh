@@ -81,6 +81,17 @@ valid_gate_status() {
   esac
 }
 
+valid_blast_radius_class() {
+  case "$1" in
+    C1 | C2 | C3)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
 manifest_section_value() {
   manifest="$1"
   section="$2"
@@ -717,6 +728,111 @@ check_manifest_amendment_state() {
   fi
 }
 
+check_manifest_scaling_state() {
+  manifest="docs/project/project.yaml"
+
+  require_file "$manifest"
+  if [ ! -f "$manifest" ]; then
+    return
+  fi
+
+  if ! grep -Eq '^scaling:' "$manifest"; then
+    warn "Manifest is missing scaling block."
+    return
+  fi
+
+  blast_radius_class="$(manifest_section_value "$manifest" "scaling" "blast_radius_class")"
+  classification_reason="$(manifest_section_value "$manifest" "scaling" "classification_reason")"
+  gate_combination_policy="$(manifest_section_value "$manifest" "scaling" "gate_combination_policy")"
+
+  if ! valid_blast_radius_class "$blast_radius_class"; then
+    fail "Manifest scaling.blast_radius_class must be C1, C2, or C3."
+  fi
+
+  if is_unknown "$classification_reason"; then
+    warn "Manifest scaling.classification_reason is missing."
+  fi
+
+  if is_unknown "$gate_combination_policy"; then
+    warn "Manifest scaling.gate_combination_policy is missing."
+  fi
+
+  combined_gate_report="$(
+    awk '
+      function trim(value) {
+        gsub(/^[[:space:]]+/, "", value)
+        gsub(/[[:space:]]+$/, "", value)
+        gsub(/^"|"$/, "", value)
+        return value
+      }
+      function is_unknown_value(value) {
+        value = trim(value)
+        return value == "" || value == "TBD" || value == "[]" || value == "[TBD]" || value == "N/A"
+      }
+      function finish_entry() {
+        if (!in_entry) {
+          return
+        }
+        if (is_unknown_value(justification)) {
+          missing++
+        }
+      }
+      /^scaling:/ {
+        in_scaling = 1
+        next
+      }
+      /^[^[:space:]][^:]*:/ && in_scaling {
+        finish_entry()
+        exit
+      }
+      in_scaling && /^[[:space:]]{2}combined_gates:/ {
+        in_combined = 1
+        next
+      }
+      in_combined && /^[[:space:]]{2}[A-Za-z0-9_]+:/ {
+        finish_entry()
+        in_entry = 0
+        in_combined = 0
+        next
+      }
+      in_combined && /^[[:space:]]{4}- / {
+        finish_entry()
+        entries++
+        in_entry = 1
+        justification = ""
+        if ($0 ~ /justification:/) {
+          value = $0
+          sub(/^.*justification:[[:space:]]*/, "", value)
+          justification = trim(value)
+        }
+        next
+      }
+      in_entry && /^[[:space:]]{6}justification:/ {
+        value = $0
+        sub(/^[[:space:]]*justification:[[:space:]]*/, "", value)
+        justification = trim(value)
+        next
+      }
+      END {
+        finish_entry()
+        printf "%d|%d\n", entries, missing
+      }
+    ' "$manifest"
+  )"
+
+  combined_gate_count="${combined_gate_report%%|*}"
+  combined_gate_missing_justification="${combined_gate_report#*|}"
+
+  if [ "$combined_gate_count" -gt 0 ] &&
+    [ "$combined_gate_missing_justification" -gt 0 ]; then
+    warn "Manifest scaling.combined_gates has entries without justification."
+  fi
+
+  if [ "$blast_radius_class" = "C3" ] && [ "$combined_gate_count" -gt 0 ]; then
+    warn "Manifest class is C3 but combined gates are recorded; C3 projects should not combine gates."
+  fi
+}
+
 check_manifest_enforcement_state() {
   manifest="docs/project/project.yaml"
 
@@ -1212,6 +1328,7 @@ else
   check_computed_staleness
   check_stale_evidence
   check_manifest_amendment_state
+  check_manifest_scaling_state
   check_manifest_enforcement_state
   check_diff_gate_movement
   check_changed_path_enforcement

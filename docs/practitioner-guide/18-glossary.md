@@ -282,6 +282,56 @@ superseded
 
 The agent should report approval state when responding to `What's next?`.
 
+## Blast Radius
+
+Blast radius is the plausible harm, cost, reversibility problem, operational impact, data exposure,
+or governance impact of a mistake. In GenDev, blast radius determines whether the methodology may
+be compressed or must become stricter.
+
+Low blast radius does not mean no discipline. It means the team may use a lighter shape when the
+work is contained and reversible. High blast radius means the team should increase review depth,
+evidence sampling, enforcement, and approval discipline.
+
+## Blast-Radius Class
+
+Blast-radius class is the declared project classification recorded in
+`docs/project/project.yaml`. GenDev uses three classes:
+
+- `C1 Contained`;
+- `C2 Standard`;
+- `C3 Critical`.
+
+The class should be chosen early, explained in the manifest, and revisited when the project starts
+touching new data, users, integrations, deployment targets, automation, or irreversible actions.
+
+## C1 Contained
+
+`C1 Contained` is the lowest GenDev blast-radius class. It applies to work such as internal tools,
+reversible outputs, no sensitive data, and low operational risk.
+
+C1 projects may use GenDev Lite, meaning a lightweight form of the methodology where some gates or
+artifacts are combined. C1 still requires explicit problem framing, requirements, architecture
+assumptions, security assumptions, build-ready approval, verification evidence, and close-out.
+
+## C2 Standard
+
+`C2 Standard` is the default GenDev blast-radius class. It applies to ordinary product work with
+moderate operational risk, moderate data risk, normal production release discipline, or meaningful
+future maintenance concerns.
+
+C2 projects should usually use the full gate chain. Gate combination is possible only with a
+recorded justification and human approval.
+
+## C3 Critical
+
+`C3 Critical` is the highest baseline GenDev blast-radius class. It applies to regulated data,
+irreversible actions, external integrations, production-sensitive automation, agentic runtime
+behavior, or high operational impact.
+
+C3 projects should not combine lifecycle gates. They should use stronger independent review,
+evidence sampling at major gates, stricter override policy, explicit production approval, and
+mechanical enforcement where practical.
+
 ## Checked
 
 `Checked` is the approval-record field where the approver states one specific thing they actually
@@ -617,6 +667,42 @@ Common modes:
 - `execution-focused`.
 
 Mode changes do not override required approvals.
+
+## Combined Gate
+
+A combined gate is a deliberate compression of two or more lifecycle gates into one artifact or
+approval path. Combined gates are allowed only when the required content remains present and the
+decision is recorded.
+
+Example:
+
+```text
+C1 project combines G1-G4 into one framing artifact that includes problem, requirements,
+architecture assumptions, governance/security assumptions, and test expectations.
+```
+
+A combined gate should record affected gates, blast-radius class, justification, preserved content,
+approver, approval date, and evidence path. A combined gate is not a shortcut around approval.
+
+## Combined-Gate Justification
+
+Combined-gate justification is the recorded reason a project may compress gates. It should explain
+why the blast radius allows compression, what required content is preserved, and what approval
+still applies.
+
+Weak justification:
+
+```text
+Small project.
+```
+
+Useful justification:
+
+```text
+G1-G4 are combined because this is a C1 local utility with reversible output, no sensitive data, no
+external integrations, and the combined artifact preserves vision, requirements, architecture
+assumptions, security assumptions, and test expectations.
+```
 
 ## Complete
 
@@ -963,6 +1049,19 @@ artifact says `Draft`, the project state is ambiguous.
 GenDev is the methodology represented by this repository. It is a documentation-first,
 human-approved, agent-assisted development workflow that moves a product from idea to production
 operation through durable artifacts, gates, evidence, review, and close-out.
+
+## GenDev Lite
+
+GenDev Lite is the lightweight C1 path through the methodology. It is used when work is contained,
+reversible, non-sensitive, low-risk, and small enough that separate early artifacts would add cost
+without improving decisions.
+
+GenDev Lite may combine early gates or phase records, but it does not remove the required content.
+A GenDev Lite project still needs durable statements of problem, users, requirements, architecture
+assumptions, security assumptions, build scope, verification, approval, review, and close-out.
+
+GenDev Lite should stop being Lite when blast radius changes. Examples include sensitive data,
+external integrations, production automation, irreversible changes, or high operational impact.
 
 ## Goodhart Warning
 
@@ -1458,6 +1557,28 @@ sub-agents are advisory unless the human explicitly delegates a bounded write ta
 agent reconciles the output.
 
 Good sub-agent tasks are bounded, source-aware, and review-oriented.
+
+## Sub-Agent Budget
+
+Sub-agent budget is the explicit effort limit for a sub-agent assignment. The budget may be stated
+as time, tokens, dollars, number of review passes, or rough effort. The point is to prevent runaway
+delegation and to keep the lead agent's synthesis useful to the human.
+
+A budget does not tell a reviewer to ignore risk. It tells the reviewer when to stop and escalate
+instead of continuing silently.
+
+## Sub-Agent Budget Escalation
+
+Sub-agent budget escalation is the condition where a sub-agent or lead agent must pause and ask the
+human whether to continue, narrow scope, add another reviewer, or reclassify the project.
+
+Examples:
+
+- the assignment reaches its budget and material risk remains unresolved;
+- the reviewer discovers C3-level exposure in a C1 or C2 project;
+- the reviewer needs source authority outside the assignment;
+- the review requires a different specialist;
+- the amount of output would overwhelm the human without improving the decision.
 
 ## Superseded
 
