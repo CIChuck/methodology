@@ -12,6 +12,8 @@ status of the current gate or artifact, authority means the accepted documents a
 agent must follow, a collaboration mode means the operating style that tells the agent whether to
 lead, pause for approval, advise only, or execute an accepted plan, and a construction directive
 means the accepted build instruction that controls implementation.
+Blast-radius class means the declared C1, C2, or C3 risk/exposure level that controls whether
+GenDev can be lightweight or must be stricter.
 
 Other prompt terms are compact because prompts need to be usable. PRD means product requirements
 document. UAT means user acceptance testing. A non-goal is something the team explicitly chooses not
@@ -27,7 +29,8 @@ a bounded review or analysis task.
 
 ```text
 Let's begin. Follow AGENTS.md and docs/project/project.yaml. Use the GenDev start-and-next-step
-protocol and tell me the current gate, active artifact, approval state, and recommended next step.
+protocol and tell me the current gate, blast-radius class, active artifact, approval state, and
+recommended next step.
 ```
 
 ## Set Mode
@@ -49,8 +52,16 @@ Use execution-focused mode for the accepted construction directive. Implement on
 
 ```text
 Re-orient from AGENTS.md, docs/project/project.yaml, docs/project/approvals/gate-log.md, and the
-current active artifact. Report current gate, mode, artifact status, approval state, blockers, and
-next recommendation.
+current active artifact. Report current gate, mode, blast-radius class, artifact status, approval
+state, blockers, and next recommendation.
+```
+
+## Classify Blast Radius
+
+```text
+Classify this project as C1, C2, or C3 before we proceed. Record the classification reason,
+reclassification triggers, and whether any gate combination is appropriate. Do not combine gates
+unless the justification is durable in project.yaml and the approval record.
 ```
 
 ## Draft Vision
@@ -128,16 +139,18 @@ post-deployment validation, known risks, and post-deployment owner.
 
 ```text
 Prepare the approval summary for the current gate. Include gate, artifact status, evidence reviewed,
-open questions, known risks, risks requiring acceptance, proposed next gate, proposed next role, and
-manifest updates to record.
+enforcement class, blast-radius class, combined-gate justification if applicable, open questions,
+known risks, risks requiring acceptance, proposed next gate, proposed next role, and manifest
+updates to record.
 ```
 
 ## Sub-Agent Review
 
 ```text
 Use bounded sub-agents for review. Assign one reviewer to security/governance, one to testability,
-and one to architecture or maintainability. Do not edit files. Return a reconciled findings list,
-conflicts, and required human decisions.
+and one to architecture or maintainability. Give each reviewer a budget and budget escalation
+condition. Do not edit files. Return a reconciled findings list, conflicts, and required human
+decisions.
 ```
 
 ## Pause

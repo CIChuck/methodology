@@ -71,8 +71,16 @@ decisions.
 
 GenDev does not require every project to become heavyweight. Small projects may combine artifacts
 (durable project documents such as the vision, PRD, architecture, plans, reviews, and close-out)
-when the required content still exists and approvals are preserved. The goal is not bureaucracy.
-The goal is enough durable context (repository state that survives beyond the chat session) that an
+when the required content still exists and approvals are preserved. This is controlled by
+blast-radius class (the declared estimate of how much harm or cost a mistake could plausibly
+cause). `C1` means contained, low-risk, reversible work. `C2` means ordinary product work. `C3`
+means critical work involving regulated data, irreversible actions, external integrations,
+production-sensitive automation, agentic runtime behavior, or high operational impact.
+
+GenDev Lite is the legitimate lightweight path for C1 work. It changes the shape of the artifacts,
+not the obligation to define the problem, requirements, architecture assumptions, security
+assumptions, build scope, verification, approval, and close-out. The goal is not bureaucracy. The
+goal is enough durable context (repository state that survives beyond the chat session) that an
 agent can do useful work without making hidden product, architecture, or risk decisions.
 
 GenDev also does not prescribe a single AI tool. The methodology is tool-agnostic. Codex-specific
@@ -109,5 +117,6 @@ The orientation phase is successful when the human and agent both know:
 - which collaboration mode is active;
 - which gate is current;
 - which artifact is active;
+- which blast-radius class applies;
 - how success will eventually be measured;
 - what the next human decision will be.

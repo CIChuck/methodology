@@ -13,5 +13,10 @@ example can demonstrate the current methodology without path drift.
 Current examples:
 
 ```text
+docs/examples/gendev-lite-contained-tool/
 docs/examples/minimal-saas-product/
 ```
+
+`gendev-lite-contained-tool/` shows a C1 GenDev Lite path where G1-G4 can be combined because the
+work is contained, reversible, and non-sensitive. `minimal-saas-product/` shows a fuller product
+path with separate artifacts.

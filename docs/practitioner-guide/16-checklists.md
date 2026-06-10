@@ -22,6 +22,10 @@ named humans confirm the checks, while enforced means a mechanical binding block
 changes.
 Metrics means on-demand measurement derived from required project records, not a separate reporting
 system.
+Blast-radius class means the declared estimate of how much harm or cost a mistake could plausibly
+cause. `C1` means contained, low-risk, reversible work. `C2` means ordinary product work. `C3`
+means critical work with higher data, operational, integration, automation, or irreversible-action
+exposure.
 
 ## New Project Checklist
 
@@ -35,6 +39,9 @@ system.
 [ ] enforcement.class confirmed as attested or enforced
 [ ] enforcement attestation cadence and override record path visible
 [ ] enforcement binding paths point to existing reference binding files
+[ ] scaling.blast_radius_class confirmed as C1, C2, or C3
+[ ] scaling.classification_reason recorded
+[ ] scaling.combined_gates empty or justified
 [ ] ./scripts/check-methodology.sh passes
 [ ] optional local hook installed, if the team wants pre-commit checks
 [ ] AI agent started from repository root
@@ -42,6 +49,22 @@ system.
 [ ] gate approver identified
 [ ] collaboration mode selected
 [ ] current gate confirmed as G1
+```
+
+## Blast-Radius Classification Checklist
+
+```text
+[ ] class selected: C1, C2, or C3
+[ ] classification reason written in docs/project/project.yaml
+[ ] sensitive or regulated data considered
+[ ] external integrations considered
+[ ] irreversible actions considered
+[ ] production automation considered
+[ ] agentic runtime behavior considered
+[ ] operational impact considered
+[ ] reclassification triggers listed when uncertainty exists
+[ ] combined gates recorded with justification, if any
+[ ] C3 projects use no combined gates
 ```
 
 ## First Agent Session Checklist
@@ -55,6 +78,18 @@ system.
 [ ] agent confirmed mode
 [ ] agent asked only material startup questions
 [ ] agent did not begin implementation
+```
+
+## Sub-Agent Budget Checklist
+
+```text
+[ ] each sub-agent assignment has a role
+[ ] each assignment has source authority
+[ ] each assignment has scope and non-goals
+[ ] each assignment has a budget
+[ ] each assignment has budget escalation conditions
+[ ] lead agent reconciles outputs before changing authority
+[ ] material conflicts are surfaced to the human
 ```
 
 ## G1 Vision Checklist

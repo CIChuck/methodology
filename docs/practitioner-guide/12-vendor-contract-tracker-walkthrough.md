@@ -52,7 +52,16 @@ approvals:
   current_gate:
     gate: G1
     status: pending
+
+scaling:
+  blast_radius_class: C2
 ```
+
+The Vendor Contract Tracker is a C2 project in this walkthrough. C2 means standard product work:
+the app is useful enough to deserve the full gate chain, and it handles confidential business
+metadata, but it is not yet classified as regulated, irreversible, or production-critical C3 work.
+If the project later adds external integrations, automated contract actions, regulated records, or
+agentic runtime behavior, the team should reclassify before continuing.
 
 ## G1: Vision
 

@@ -60,6 +60,25 @@ Rules:
   without mature mechanical bindings.
 - An attested project should migrate requirements to enforced as tooling permits.
 
+## Relationship To Blast-Radius Class
+
+Enforcement class and blast-radius class are related but not interchangeable.
+
+```text
+enforcement.class
+  says whether methodology controls are mechanical or human-attested.
+
+scaling.blast_radius_class
+  says how much lifecycle ceremony, review depth, evidence sampling, and override discipline the
+  project needs.
+```
+
+A C1 project may still use `class: attested` when the risk is low and the team records the required
+checks. A C3 project should prefer mechanical enforcement where practical and should justify any
+attested-only control that protects production, regulated data, irreversible actions, or agentic
+runtime behavior. Lower blast radius never permits bypassing recorded gate movement, approval
+evidence, or override records.
+
 ## Normative Requirements
 
 The key words MUST, MUST NOT, SHOULD, and MAY are to be interpreted as described in RFC 2119.

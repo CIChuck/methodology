@@ -62,12 +62,42 @@ Confirm the manifest (the compact `project.yaml` tracking record for current pro
 - `enforcement.attestation.cadence` records when humans must attest that required checks happened;
 - `enforcement.binding_paths` points to the reference binding files, even if the project is still
   operating in attested mode;
+- `scaling.blast_radius_class` is `C1`, `C2`, or `C3`;
+- `scaling.classification_reason` explains why that class is appropriate;
+- `scaling.combined_gates` is empty unless the project intentionally combines gates;
 - approval state is `pending`;
 - the G1 evidence path points to the vision document.
 
 The owner and approver fields may initially be `TBD`. The agent can draft early G1 material before
 those fields are resolved, but it should not mark the gate `ready_for_approval` (ready for a human
 approval decision) until required human authority is known.
+
+## Select Blast-Radius Class
+
+Blast-radius class is the declared estimate of how much harm or cost a mistake could plausibly
+cause. Choose it early and revise it when exposure changes.
+
+Use:
+
+- `C1` for contained work, such as a reversible internal utility with no sensitive data and no
+  external system effects;
+- `C2` for ordinary product work, which is the default for most useful applications;
+- `C3` for critical work, such as regulated data, irreversible actions, external integrations,
+  production-sensitive automation, agentic runtime behavior, or high operational impact.
+
+Do not use `C1` simply because the team wants fewer documents. Use `C1` only when the project is
+actually contained. If the work later touches sensitive data, production automation, external
+systems, or irreversible outcomes, reclassify before continuing.
+
+Example startup prompt:
+
+```text
+Before drafting the vision, classify the project as C1, C2, or C3. Explain the reason and identify
+any reclassification triggers.
+```
+
+If the project is C1 and the human wants a GenDev Lite path, record the intended gate combination
+under `scaling.combined_gates` with a justification. Do not combine gates silently.
 
 ## Run The Checker
 
@@ -157,6 +187,8 @@ Gate approver:
 Deployment approver, if known:
 Collaboration mode (how proactively the agent should act and when it must pause):
 Sub-agents allowed (specialized AI workers for bounded review or analysis):
+Blast-radius class:
+Classification reason:
 Initial product objective:
 ```
 
@@ -168,6 +200,8 @@ Gate approver: Chuck
 Deployment approver: TBD until we define production
 Mode: proactive, but keep gate approvals explicit
 Sub-agents: allowed for reviews and risk analysis
+Blast-radius class: C2
+Classification reason: customer-facing business app with confidential contract metadata
 Objective: build a lightweight system for tracking vendor contracts, owners, renewals, and status
 ```
 
@@ -182,6 +216,7 @@ The startup phase ends when:
 - `project.yaml` is readable and coherent;
 - the current gate is G1;
 - enforcement class and attestation cadence are visible in `project.yaml`;
+- blast-radius class and classification reason are visible in `project.yaml`;
 - collaboration mode is known;
 - the human has supplied enough context to draft the vision document;
 - the agent knows not to proceed beyond G1 without approval.

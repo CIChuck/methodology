@@ -30,9 +30,10 @@ Before recommending a next action, the agent checks:
 3. docs/project/project.yaml.
 4. Current gate.
 5. Current collaboration mode.
-6. Current active artifact.
-7. Current approval state and approval log.
-8. Blocking missing authority.
+6. Current blast-radius class.
+7. Current active artifact.
+8. Current approval state and approval log.
+9. Blocking missing authority.
 ```
 
 If `docs/project/` does not exist, the next action is initialization.
@@ -64,6 +65,8 @@ Gate approver:
 Deployment approver, if known:
 Collaboration mode:
 Sub-agents allowed:
+Blast-radius class:
+Classification reason:
 Initial product/project objective:
 ```
 
@@ -80,6 +83,7 @@ Agent response:
 ```text
 Current gate:
 Current mode:
+Blast-radius class:
 Current artifact:
 Readiness:
 Approval state:
@@ -226,6 +230,7 @@ Use this concise format:
 ```text
 Current gate:
 Current state:
+Blast-radius class:
 Recommended next step:
 Why:
 Human input needed:

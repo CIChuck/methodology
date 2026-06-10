@@ -113,6 +113,44 @@ Can we reconcile the dirty subtree while the current gate holds, or did the chan
 earlier gate decision?
 ```
 
+## Blast-Radius Scaling
+
+Blast-radius scaling means adjusting the amount of ceremony to the risk and exposure of the work.
+The class belongs in `docs/project/project.yaml` under `scaling.blast_radius_class`.
+
+Use:
+
+- `C1 Contained` for internal tools, reversible outputs, no sensitive data, and low operational
+  risk;
+- `C2 Standard` for ordinary product work with moderate operational or data risk;
+- `C3 Critical` for regulated data, irreversible actions, external integrations,
+  production-sensitive automation, agentic runtime behavior, or high operational impact.
+
+The class affects gate handling:
+
+| Class | Practical gate handling |
+| --- | --- |
+| C1 | Early gates may be combined into one framing artifact if the artifact still contains the vision, requirements, architecture assumptions, security assumptions, and test expectations. |
+| C2 | Use the full default chain unless the human records a specific reason to combine gates. |
+| C3 | Do not combine gates; add stronger review, evidence sampling, enforcement, and production discipline. |
+
+GenDev Lite means the C1 lightweight path. It is not permission to skip thinking. It is permission
+to combine form when the risk is genuinely contained and the required content remains visible.
+
+When gates are combined, record:
+
+```text
+affected gates
+blast-radius class
+justification
+preserved content
+approver
+approval date
+evidence path
+```
+
+The checker warns when combined gates appear without a recorded justification.
+
 ## Gate Overview
 
 ## G0: Project Initialized
@@ -352,6 +390,7 @@ Is there an active amendment or regression that affects this evidence?
 What human approval is required?
 What did the approver actually check?
 What enforcement class applies, and what attestation or enforcement evidence exists?
+What blast-radius class applies, and is any gate combination justified?
 What measurement or value-review evidence is now due?
 What risk is being accepted?
 What happens next?

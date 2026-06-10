@@ -84,7 +84,8 @@ Initialization creates:
 - the active project folder structure.
 
 After initialization, the human owner and agent should inspect `docs/project/project.yaml` and update
-owner, required approver, status, current gate, evidence, risk, and next-handoff fields.
+owner, required approver, status, current gate, evidence, risk, blast-radius class, and
+next-handoff fields.
 
 The human should also set or confirm collaboration mode:
 
@@ -103,6 +104,7 @@ Stop if:
 - `docs/project/project.yaml` points to files that do not exist;
 - the product owner is unknown;
 - the agent cannot identify the current gate.
+- the agent cannot identify the blast-radius class.
 
 ### 2. Vision Loop
 

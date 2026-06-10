@@ -43,6 +43,14 @@ collaboration:
   mode_set_by: TBD
   mode_set_on: TBD
 
+scaling:
+  blast_radius_class: C2
+  classification_reason: Default C2 standard product path until human reclassifies.
+  classification_owner: TBD
+  class_set_on: TBD
+  gate_combination_policy: default_full_chain
+  combined_gates: []
+
 approvals:
   record_format: structured_markdown_yaml
   current_gate:

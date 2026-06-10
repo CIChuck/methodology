@@ -76,6 +76,11 @@ When enforcement class, gate protection, or implementation-path controls matter,
 `docs/methodology/guides/enforcement-contract.md`. Attested enforcement is valid at baseline, but
 the active project must declare its class in `docs/project/project.yaml`.
 
+When project scale, gate combination, or GenDev Lite matters, follow
+`docs/methodology/guides/gates.md`. The active project must declare `scaling.blast_radius_class`
+as `C1`, `C2`, or `C3` in `docs/project/project.yaml`. Enforcement class and blast-radius class are
+different controls.
+
 Use `docs/project/project.yaml` as the active project control-plane summary and
 `docs/project/approvals/gate-log.md` as the durable approval history. Do not treat a gate as
 approved unless the required approver, approval date, evidence, and risk disposition are recorded.
