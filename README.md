@@ -93,10 +93,11 @@ documents under `docs/project/`.
 - Sub-agent coordination protocol: `docs/methodology/guides/subagent-coordination-protocol.md`
 - Artifact collaboration protocol: `docs/methodology/guides/artifact-collaboration-protocol.md`
 - Production operations protocol: `docs/methodology/guides/production-operations-protocol.md`
+- Orchestration validation: `docs/methodology/guides/orchestration-validation.md`
 - Templates: `docs/methodology/templates/`
 - Dev-skill guidance: `docs/methodology/dev-skills/`
-- Agent role playbooks: `docs/methodology/Agents/roles/`
-- Sample agent instructions: `docs/methodology/Agents/Sample-AGENTS.md`
+- Agent role playbooks: `docs/methodology/agents/roles/`
+- Sample agent instructions: `docs/methodology/agents/sample-agents.md`
 - Examples: `docs/examples/`
 - Methodology checker: `scripts/check-methodology.sh`
 
@@ -109,8 +110,8 @@ Before implementation, phase close-out, or handoff, run:
 ```
 
 On an uninitialized baseline, the checker reports that `docs/project/` does not exist yet. After
-initialization, it checks the active project structure, manifest paths, accepted-doc placeholders,
-phase planning sections, and traceability evidence signals.
+initialization, it checks the active project structure, manifest paths, approval-state invariants,
+ready/accepted artifact placeholders, phase planning sections, and traceability evidence signals.
 
 ## Orchestration Layer
 
@@ -126,6 +127,7 @@ ask material questions
 draft the next artifact
 review and revise with the human
 record lightweight approvals
+preserve gate history in docs/project/approvals/gate-log.md
 coordinate bounded sub-agent work
 advance gates only with required evidence
 prepare deployment, rollback, monitoring, and runbook procedures

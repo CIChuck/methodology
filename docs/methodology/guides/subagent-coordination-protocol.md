@@ -24,7 +24,8 @@ human team member
   -> accepted project documents
 ```
 
-The human owns approval. The lead agent owns orchestration. Sub-agents provide bounded input.
+The human owns approval. The lead agent owns orchestration and reconciliation. Sub-agents provide
+bounded input.
 
 ## Lead Agent Responsibilities
 
@@ -38,7 +39,8 @@ The lead agent must:
 - surface conflicts;
 - synthesize recommendations;
 - ask the human for approval when required;
-- ensure accepted conclusions land in active project documents.
+- ensure accepted conclusions land in active project documents, approval records, or decision
+  records.
 
 The lead agent must not hide significant disagreement.
 
@@ -164,6 +166,9 @@ Sub-agent output is not authority. Authority changes only when accepted into:
 - decision records;
 - traceability matrix;
 - as-built close-out.
+
+Only the lead agent should update authoritative project documents or approval records unless the
+human explicitly delegates a bounded write task to a sub-agent.
 
 ## Stop Conditions
 

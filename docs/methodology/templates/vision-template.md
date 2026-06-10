@@ -1,6 +1,6 @@
 # Vision / Problem Framing: [Project Name]
 
-Status: Draft | Accepted | Superseded
+Status: Draft | Ready for Review | Ready for Approval | Accepted | Superseded
 Date:
 Owner:
 Authority: `docs/methodology/constitution/gendev.md` — Vision / Problem Framing

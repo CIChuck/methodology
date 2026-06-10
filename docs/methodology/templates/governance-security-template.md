@@ -1,6 +1,6 @@
 # Governance and Security Specification: [Project Name]
 
-Status: Draft | Accepted | Superseded
+Status: Draft | Ready for Review | Ready for Approval | Accepted | Superseded
 Date:
 Owner:
 Authority: `docs/methodology/constitution/gendev.md` — Governance and Security Specification

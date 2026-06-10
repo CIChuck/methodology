@@ -17,17 +17,24 @@ authority documents define the stack and implementation plan.
 
 ## Manifest
 
-`project.yaml` is the active project's tracking manifest. It records:
+`project.yaml` is the active project's control-plane manifest. It records:
 
 - project identity and current gate;
 - human owner and approval fields;
 - collaboration mode and lead-agent fields;
 - authority document paths;
 - current phase paths;
-- current approval summary;
+- current approval summary, including gate status, approver, evidence, risk acceptance, and next
+  handoff;
 - example/non-authority notes.
 
-The manifest is a map, not a replacement for the documents it references.
+The manifest is a map and state summary, not a replacement for the documents it references.
+
+## Approval Log
+
+`approvals/gate-log.md` is the durable approval history for the active project. The manifest should
+summarize the latest approval state; the log should preserve who approved what, what evidence was
+reviewed, what risks were accepted, and what gate or role comes next.
 
 ## Orchestration
 
@@ -44,6 +51,7 @@ Key guides:
 - `subagent-coordination-protocol.md`
 - `artifact-collaboration-protocol.md`
 - `production-operations-protocol.md`
+- `orchestration-validation.md`
 
 ## Validation
 
@@ -53,5 +61,5 @@ After initialization, run:
 ./scripts/check-methodology.sh
 ```
 
-The checker validates the active project structure, manifest paths, phase-plan sections, and basic
-traceability evidence signals.
+The checker validates the active project structure, manifest paths, approval-state invariants,
+phase-plan sections, and basic traceability evidence signals.

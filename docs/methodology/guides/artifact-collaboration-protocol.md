@@ -26,6 +26,26 @@ For every artifact:
 - do not mark planned behavior as implemented;
 - record approval when the artifact becomes authority.
 
+## Artifact Status Values
+
+Use these status values for planning authority artifacts:
+
+```text
+Draft
+Ready for Review
+Ready for Approval
+Accepted
+Superseded
+```
+
+Use `Ready for Review` when the agent wants human feedback but the artifact is not yet approval
+candidate quality. Use `Ready for Approval` only when the artifact has completed its accuracy pass,
+open questions are non-blocking or explicitly carried forward, and known risks are listed for human
+disposition.
+
+Reports and close-out artifacts may use `Complete` instead of `Accepted` when they record review or
+evidence rather than define future build authority.
+
 ## Vision
 
 Responsible role: Product Vision Agent.

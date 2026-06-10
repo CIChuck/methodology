@@ -62,6 +62,7 @@ slug_sed="$(printf '%s' "$slug" | sed 's/[\/&]/\\&/g')"
 today_sed="$(printf '%s' "$today" | sed 's/[\/&]/\\&/g')"
 
 mkdir -p \
+  "$target/approvals" \
   "$target/vision" \
   "$target/prd" \
   "$target/architecture" \
@@ -87,6 +88,7 @@ render_template() {
 }
 
 render_template "$project_template/project.yaml" "$target/project.yaml"
+render_template "$project_template/approvals/gate-log.md" "$target/approvals/gate-log.md"
 render_template "$template_root/vision-template.md" "$target/vision/$slug-vision.md"
 render_template "$template_root/prd-template.md" "$target/prd/$slug-prd.md"
 render_template "$template_root/architecture-template.md" "$target/architecture/$slug-architecture.md"
@@ -102,7 +104,7 @@ render_template "$template_root/as-built-closeout-template.md" "$target/as-built
 cat > "$target/build-plan/phase-roadmap.md" <<EOF
 # Phase Roadmap: $project_name
 
-Status: Draft
+Status: Draft | Ready for Review | Ready for Approval | Accepted | Superseded
 Date: $today
 Owner: TBD
 Authority: docs/methodology/constitution/gendev.md
@@ -137,7 +139,7 @@ EOF
 cat > "$target/build-plan/phases/phase-1-construction-directive.md" <<EOF
 # Phase 1 Construction Directive: $project_name
 
-Status: Draft
+Status: Draft | Ready for Review | Ready for Approval | Accepted | Superseded
 Date: $today
 Owner: TBD
 Authority: docs/methodology/constitution/gendev.md

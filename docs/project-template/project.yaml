@@ -23,11 +23,13 @@ authority:
   subagent_protocol: docs/methodology/guides/subagent-coordination-protocol.md
   artifact_protocol: docs/methodology/guides/artifact-collaboration-protocol.md
   production_protocol: docs/methodology/guides/production-operations-protocol.md
+  orchestration_validation: docs/methodology/guides/orchestration-validation.md
   vision: docs/project/vision/[project-slug]-vision.md
   prd: docs/project/prd/[project-slug]-prd.md
   architecture: docs/project/architecture/[project-slug]-architecture.md
   governance_security: docs/project/security-governance/governance-security-spec.md
   traceability: docs/project/traceability/[project-slug]-traceability-matrix.md
+  approval_log: docs/project/approvals/gate-log.md
 
 collaboration:
   mode: approval-gated
@@ -41,13 +43,23 @@ approvals:
   current_gate:
     gate: G1
     status: pending
+    required_approver: TBD
     approved_by: TBD
     approved_on: TBD
-    evidence: TBD
+    evidence:
+      - docs/project/vision/[project-slug]-vision.md
+    risks_accepted:
+      - TBD
+    blocking_open_questions:
+      - TBD
+    next_gate: G2
+    next_role: prd-agent
+    next_artifact: docs/project/prd/[project-slug]-prd.md
   latest_decision:
     decision: TBD
-    approved_by: TBD
-    approved_on: TBD
+    decided_by: TBD
+    decided_on: TBD
+    record: docs/project/approvals/gate-log.md
 
 phase:
   current: 1

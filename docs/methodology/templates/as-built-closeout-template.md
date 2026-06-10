@@ -1,6 +1,6 @@
 # As-Built Documentation Close-Out: [Project Name] — Phase [N]: [Phase Name]
 
-Status: Draft | Complete
+Status: Draft | Ready for Review | Complete | Superseded
 Date:
 Owner:
 Authority: `docs/methodology/constitution/gendev.md` — Rule 9: As-Built Documentation Is Definition of Done

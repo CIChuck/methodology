@@ -14,11 +14,12 @@ needed to move from one gate to another.
 Gate status values:
 
 ```text
-not_started
-in_progress
-blocked
+pending
+drafting
+ready_for_review
 ready_for_approval
-accepted
+approved
+blocked
 superseded
 ```
 

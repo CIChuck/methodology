@@ -44,8 +44,9 @@ Use lifecycle and orchestration guides from `docs/methodology/guides/`:
 - `subagent-coordination-protocol.md`
 - `artifact-collaboration-protocol.md`
 - `production-operations-protocol.md`
+- `orchestration-validation.md`
 
-Use role playbooks from `docs/methodology/Agents/roles/`.
+Use role playbooks from `docs/methodology/agents/roles/`.
 
 ## Active Project Authority
 
@@ -55,6 +56,7 @@ Expected structure:
 
 ```text
 docs/project/vision/
+docs/project/approvals/
 docs/project/prd/
 docs/project/architecture/
 docs/project/security-governance/
@@ -71,6 +73,15 @@ The project manifest should live at:
 ```text
 docs/project/project.yaml
 ```
+
+The durable gate approval history should live at:
+
+```text
+docs/project/approvals/gate-log.md
+```
+
+Do not treat a gate as approved unless the required approver, approval date, evidence, and risk
+disposition are recorded in durable project authority.
 
 If `docs/project/` does not exist, initialize it before product implementation:
 

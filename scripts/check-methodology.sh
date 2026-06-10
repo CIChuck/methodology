@@ -30,6 +30,126 @@ require_dir() {
   fi
 }
 
+is_unknown() {
+  case "$1" in
+    "" | "TBD" | "\"TBD\"" | "[]" | "[TBD]" | "[Project Name]" | "[project-slug]")
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+manifest_section_value() {
+  manifest="$1"
+  section="$2"
+  key="$3"
+
+  awk -v section="$section" -v key="$key" '
+    /^[^[:space:]][^:]*:/ {
+      current = $1
+      sub(":", "", current)
+      in_section = (current == section)
+      next
+    }
+    in_section && $0 ~ "^[[:space:]]+" key ":" {
+      sub("^[[:space:]]*" key ":[[:space:]]*", "")
+      gsub(/^"|"$/, "")
+      print
+      exit
+    }
+  ' "$manifest"
+}
+
+manifest_nested_value() {
+  manifest="$1"
+  section="$2"
+  nested="$3"
+  key="$4"
+
+  awk -v section="$section" -v nested="$nested" -v key="$key" '
+    /^[^[:space:]][^:]*:/ {
+      current = $1
+      sub(":", "", current)
+      in_section = (current == section)
+      in_nested = 0
+      next
+    }
+    in_section && $0 ~ "^[[:space:]]{2}" nested ":" {
+      in_nested = 1
+      next
+    }
+    in_nested && $0 ~ "^[[:space:]]{2}[A-Za-z0-9_]+:" {
+      in_nested = 0
+    }
+    in_nested && $0 ~ "^[[:space:]]{4}" key ":" {
+      sub("^[[:space:]]*" key ":[[:space:]]*", "")
+      gsub(/^"|"$/, "")
+      print
+      exit
+    }
+  ' "$manifest"
+}
+
+manifest_current_gate_block() {
+  manifest="$1"
+
+  awk '
+    /^approvals:/ {
+      in_approvals = 1
+      next
+    }
+    /^[^[:space:]][^:]*:/ && in_approvals {
+      exit
+    }
+    in_approvals && /^  current_gate:/ {
+      in_gate = 1
+      next
+    }
+    in_gate && /^  [A-Za-z0-9_]+:/ {
+      exit
+    }
+    in_gate {
+      print
+    }
+  ' "$manifest"
+}
+
+manifest_current_gate_list_values() {
+  manifest="$1"
+  list_key="$2"
+
+  awk -v list_key="$list_key" '
+    /^approvals:/ {
+      in_approvals = 1
+      next
+    }
+    /^[^[:space:]][^:]*:/ && in_approvals {
+      exit
+    }
+    in_approvals && /^  current_gate:/ {
+      in_gate = 1
+      next
+    }
+    in_gate && /^  [A-Za-z0-9_]+:/ {
+      exit
+    }
+    in_gate && $0 ~ "^[[:space:]]{4}" list_key ":" {
+      in_list = 1
+      next
+    }
+    in_list && /^    [A-Za-z0-9_]+:/ {
+      exit
+    }
+    in_list && /^      - / {
+      sub("^[[:space:]]*-[[:space:]]*", "")
+      gsub(/^"|"$/, "")
+      print
+    }
+  ' "$manifest"
+}
+
 check_heading() {
   file="$1"
   heading="$2"
@@ -45,9 +165,10 @@ check_baseline_files() {
   require_file "docs/methodology/constitution/gendev.md"
   require_file "docs/methodology/guides/agentic-development-workflow.md"
   require_file "docs/methodology/guides/gates.md"
+  require_file "docs/methodology/guides/orchestration-validation.md"
   require_dir "docs/methodology/templates"
   require_dir "docs/methodology/dev-skills"
-  require_dir "docs/methodology/Agents/roles"
+  require_dir "docs/methodology/agents/roles"
   require_file "scripts/init-project.sh"
 }
 
@@ -62,7 +183,9 @@ check_manifest_paths() {
   while IFS= read -r line; do
     path="$(
       printf '%s\n' "$line" |
-        sed -n 's/^[[:space:]]*[A-Za-z0-9_]*:[[:space:]]*\(docs\/[^ #]*\).*$/\1/p'
+        sed -n \
+          -e 's/^[[:space:]]*[A-Za-z0-9_]*:[[:space:]]*\(docs\/[^ #]*\).*$/\1/p' \
+          -e 's/^[[:space:]]*-[[:space:]]*\(docs\/[^ #]*\).*$/\1/p'
     )"
 
     if [ -n "$path" ] && [ ! -e "$path" ]; then
@@ -72,6 +195,8 @@ check_manifest_paths() {
 }
 
 check_project_structure() {
+  require_dir "docs/project/approvals"
+  require_file "docs/project/approvals/gate-log.md"
   require_dir "docs/project/vision"
   require_dir "docs/project/prd"
   require_dir "docs/project/architecture"
@@ -85,7 +210,7 @@ check_project_structure() {
 }
 
 check_sample_reference_drift() {
-  paths="README.md AGENTS.md docs/examples docs/methodology/Agents"
+  paths="README.md AGENTS.md docs/examples docs/methodology/agents"
 
   if [ -d "docs/project" ]; then
     paths="$paths docs/project"
@@ -97,18 +222,165 @@ check_sample_reference_drift() {
 }
 
 check_accepted_doc_placeholders() {
-  find docs/project -type f \( -name '*.md' -o -name '*.yaml' \) -print |
-    while IFS= read -r file; do
-      if grep -Eq '^(Status|status):[[:space:]]*(Accepted|Complete|accepted|complete)[[:space:]]*$' "$file"; then
-        if grep -Eq '\[[^][]+\]|TBD|Replace with' "$file"; then
-          printf 'ERROR: Accepted/complete document still has placeholders: %s\n' "$file"
-          exit 1
-        fi
+  while IFS= read -r file; do
+    if grep -Eq '^(Status|status):[[:space:]]*(Accepted|Complete|accepted|complete)[[:space:]]*$' "$file"; then
+      if grep -Eq '\[[^][]+\]|TBD|Replace with' "$file"; then
+        fail "Accepted/complete document still has placeholders: $file"
       fi
-    done
+    fi
 
-  if [ "$?" -ne 0 ]; then
-    errors=$((errors + 1))
+    if grep -Eq '^(Status|status):[[:space:]]*(Ready for Approval|ready_for_approval)[[:space:]]*$' "$file"; then
+      if grep -Eq '\[[^][]+\]|TBD|Replace with' "$file"; then
+        warn "Ready-for-approval document still has placeholders: $file"
+      fi
+    fi
+  done < <(find docs/project -type f \( -name '*.md' -o -name '*.yaml' \) -print)
+}
+
+check_manifest_approval_state() {
+  manifest="docs/project/project.yaml"
+  log="docs/project/approvals/gate-log.md"
+
+  require_file "$manifest"
+  if [ ! -f "$manifest" ]; then
+    return
+  fi
+
+  project_gate="$(manifest_section_value "$manifest" "project" "current_gate")"
+  owner="$(manifest_section_value "$manifest" "human_control" "owner")"
+  approver="$(manifest_section_value "$manifest" "human_control" "approver")"
+  gate="$(manifest_nested_value "$manifest" "approvals" "current_gate" "gate")"
+  gate_status="$(manifest_nested_value "$manifest" "approvals" "current_gate" "status")"
+  required_approver="$(manifest_nested_value "$manifest" "approvals" "current_gate" "required_approver")"
+  approved_by="$(manifest_nested_value "$manifest" "approvals" "current_gate" "approved_by")"
+  approved_on="$(manifest_nested_value "$manifest" "approvals" "current_gate" "approved_on")"
+  next_gate="$(manifest_nested_value "$manifest" "approvals" "current_gate" "next_gate")"
+  next_role="$(manifest_nested_value "$manifest" "approvals" "current_gate" "next_role")"
+  next_artifact="$(manifest_nested_value "$manifest" "approvals" "current_gate" "next_artifact")"
+  risks="$(manifest_current_gate_list_values "$manifest" "risks_accepted")"
+  blockers="$(manifest_current_gate_list_values "$manifest" "blocking_open_questions")"
+  evidence="$(manifest_current_gate_list_values "$manifest" "evidence")"
+
+  case "$gate_status" in
+    pending | drafting | ready_for_review | ready_for_approval | approved | blocked | superseded)
+      ;;
+    "")
+      warn "Manifest approval status is missing."
+      ;;
+    *)
+      warn "Manifest approval status is not recognized: $gate_status"
+      ;;
+  esac
+
+  if [ -n "$project_gate" ] && [ -n "$gate" ] && [ "$project_gate" != "$gate" ]; then
+    warn "Project current_gate ($project_gate) differs from approvals.current_gate.gate ($gate)."
+  fi
+
+  if [ "$gate_status" = "ready_for_approval" ]; then
+    if is_unknown "$owner"; then
+      warn "Gate is ready_for_approval but human_control.owner is not set."
+    fi
+    if is_unknown "$approver" && is_unknown "$required_approver"; then
+      warn "Gate is ready_for_approval but no approver is set."
+    fi
+    if [ -z "$evidence" ]; then
+      warn "Gate is ready_for_approval but evidence is missing."
+    fi
+    if [ -z "$risks" ] || printf '%s\n' "$risks" | grep -Eq '^TBD$|^$'; then
+      warn "Gate is ready_for_approval but risk disposition is still TBD."
+    fi
+    if printf '%s\n' "$blockers" | grep -Eq '^TBD$'; then
+      warn "Gate is ready_for_approval but blocking_open_questions is still TBD."
+    fi
+    if is_unknown "$next_gate" || is_unknown "$next_role" || is_unknown "$next_artifact"; then
+      warn "Gate is ready_for_approval but next gate, role, or artifact is missing."
+    fi
+  fi
+
+  if [ "$gate_status" = "approved" ]; then
+    if is_unknown "$approved_by"; then
+      fail "Gate is approved but approved_by is not set."
+    fi
+    if is_unknown "$approved_on"; then
+      fail "Gate is approved but approved_on is not set."
+    fi
+    if [ -z "$evidence" ]; then
+      fail "Gate is approved but evidence is missing."
+    fi
+    if [ -z "$risks" ] || printf '%s\n' "$risks" | grep -Eq '^TBD$|^$'; then
+      fail "Gate is approved but risk disposition is still TBD."
+    fi
+    if [ -f "$log" ] && ! grep -Eq '^## .+ Approval|Decision:[[:space:]]*(Approved|Accepted)' "$log"; then
+      warn "Gate is approved in manifest but no approval record is visible in gate-log.md."
+    fi
+  fi
+}
+
+check_accepted_artifact_approval_records() {
+  manifest="docs/project/project.yaml"
+  log="docs/project/approvals/gate-log.md"
+  accepted_count=0
+
+  while IFS= read -r file; do
+    if grep -Eq '^Status:[[:space:]]*Accepted[[:space:]]*$' "$file"; then
+      accepted_count=$((accepted_count + 1))
+    fi
+  done < <(find docs/project -type f -name '*.md' -print)
+
+  if [ "$accepted_count" -gt 0 ]; then
+    gate_status="$(manifest_nested_value "$manifest" "approvals" "current_gate" "status")"
+    if [ "$gate_status" != "approved" ] && { [ ! -f "$log" ] || ! grep -Eq 'Decision:[[:space:]]*(Approved|Accepted)' "$log"; }; then
+      warn "Accepted artifact exists but no approved manifest state or gate-log decision was found."
+    fi
+  fi
+}
+
+check_current_gate_artifact_status() {
+  manifest="docs/project/project.yaml"
+
+  [ -f "$manifest" ] || return
+
+  project_gate="$(manifest_section_value "$manifest" "project" "current_gate")"
+  gate_status="$(manifest_nested_value "$manifest" "approvals" "current_gate" "status")"
+  artifact=""
+
+  case "$project_gate" in
+    G1)
+      artifact="$(find docs/project/vision -maxdepth 1 -type f -name '*.md' | sort | head -n 1)"
+      ;;
+    G2)
+      artifact="$(find docs/project/prd -maxdepth 1 -type f -name '*.md' | sort | head -n 1)"
+      ;;
+    G3)
+      artifact="$(find docs/project/architecture -maxdepth 1 -type f -name '*.md' | sort | head -n 1)"
+      ;;
+    G4)
+      artifact="$(find docs/project/security-governance -maxdepth 1 -type f -name '*.md' | sort | head -n 1)"
+      ;;
+  esac
+
+  [ -n "$artifact" ] || return
+
+  artifact_status="$(sed -n 's/^Status:[[:space:]]*//p' "$artifact" | head -n 1)"
+
+  if [ "$gate_status" = "ready_for_approval" ]; then
+    case "$artifact_status" in
+      "Ready for Approval" | "Accepted")
+        ;;
+      *)
+        warn "$project_gate is ready_for_approval but $artifact status is '$artifact_status'."
+        ;;
+    esac
+  fi
+
+  if [ "$gate_status" = "approved" ]; then
+    case "$artifact_status" in
+      "Accepted" | "Complete")
+        ;;
+      *)
+        warn "$project_gate is approved but $artifact status is '$artifact_status'."
+        ;;
+    esac
   fi
 }
 
@@ -167,7 +439,10 @@ if [ ! -d "docs/project" ]; then
 else
   check_project_structure
   check_manifest_paths
+  check_manifest_approval_state
   check_accepted_doc_placeholders
+  check_accepted_artifact_approval_records
+  check_current_gate_artifact_status
   check_phase_plans
   check_traceability_evidence
 fi

@@ -31,7 +31,8 @@ Before recommending a next action, the agent checks:
 4. Current gate.
 5. Current collaboration mode.
 6. Current active artifact.
-7. Blocking missing authority.
+7. Current approval state and approval log.
+8. Blocking missing authority.
 ```
 
 If `docs/project/` does not exist, the next action is initialization.
@@ -47,12 +48,28 @@ Agent response:
 2. If missing, recommend running ./scripts/init-project.sh "Project Name".
 3. If initialized, read project.yaml and identify current gate.
 4. Ask for or confirm collaboration mode.
-5. Recommend the first actionable step.
+5. Ask for or confirm project owner and gate approver before any approval boundary.
+6. Recommend the first actionable step.
 ```
 
 If no project name exists, ask for it.
 
 If the project is initialized at G1, begin the vision loop.
+
+First-run preflight should capture:
+
+```text
+Project owner:
+Gate approver:
+Deployment approver, if known:
+Collaboration mode:
+Sub-agents allowed:
+Initial product/project objective:
+```
+
+The agent may draft G1 while some authority fields are unknown. It should not mark G1
+`ready_for_approval` until the owner, required approver, evidence path, open-question status, and
+risk disposition are known.
 
 ## "What's Next?"
 
@@ -65,6 +82,7 @@ Current gate:
 Current mode:
 Current artifact:
 Readiness:
+Approval state:
 Recommended next step:
 Human decision needed:
 ```
@@ -108,6 +126,20 @@ Agent response:
 ```
 
 "Proceed" does not bypass gate approvals, security approvals, or production approvals.
+
+If `Proceed` could mean gate approval, the agent should restate the approval record before acting:
+
+```text
+I understand this as approval for:
+Gate:
+Evidence:
+Known risks accepted:
+Next gate:
+Next role:
+Record locations:
+```
+
+If any field is unknown, ask for the missing field instead of advancing.
 
 ## "Pause"
 

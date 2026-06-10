@@ -11,6 +11,18 @@ recommended when moving from one methodology gate to the next.
 
 Gate transitions are procedural decisions. They should not happen implicitly.
 
+## State Model
+
+Artifact status and gate status are related but separate:
+
+```text
+Artifact status: Draft -> Ready for Review -> Ready for Approval -> Accepted
+Gate status:     pending -> drafting -> ready_for_review -> ready_for_approval -> approved
+```
+
+An artifact can be `Ready for Approval` before the gate is approved. A gate becomes `approved` only
+after the human approval record is durable and `project.yaml` summarizes the decision.
+
 ## Universal Transition Checklist
 
 Before any gate transition, confirm:
@@ -18,12 +30,15 @@ Before any gate transition, confirm:
 ```text
 [ ] current gate is known
 [ ] required source docs exist
-[ ] required artifact status is ready for approval or accepted
+[ ] required artifact status is Ready for Approval or Accepted
+[ ] required approver is known
 [ ] blocking questions are resolved or assigned
 [ ] required tests or test plans are present for the gate
 [ ] security/governance implications are addressed
+[ ] known risks are listed or explicitly N/A
 [ ] human approval is recorded when required
 [ ] project.yaml is updated or update is queued
+[ ] gate-log.md is updated or update is queued
 [ ] next role and artifact are identified
 ```
 
@@ -40,12 +55,28 @@ Approved by:
 Date:
 Evidence:
 Known risks accepted:
+Open questions allowed to carry forward:
 Next role:
 Next artifact:
+Manifest updated:
 ```
 
-This record may live in the artifact being approved, a gate log, or another active project document.
-`project.yaml` should summarize the current gate and approval state.
+This record should live in `docs/project/approvals/gate-log.md` and may also live in the approved
+artifact. `project.yaml` should summarize the current gate and approval state.
+
+Before requesting approval, the lead agent should show the human:
+
+```text
+Gate:
+Artifact status:
+Evidence reviewed:
+Open questions:
+Known risks:
+Risks requiring acceptance:
+Proposed next gate:
+Proposed next role:
+Manifest updates to record:
+```
 
 ## G0 -> G1: Project Initialized To Vision Ready Work
 
@@ -54,6 +85,7 @@ Required:
 - `docs/project/project.yaml`;
 - active project folder structure;
 - human owner or temporary owner;
+- required approver, if known;
 - collaboration mode.
 
 Review questions:
@@ -79,6 +111,7 @@ Stop if:
 Required:
 
 - accepted vision/problem framing document;
+- gate approval log entry or queued approval record;
 - target users;
 - success criteria;
 - non-goals;
@@ -109,6 +142,7 @@ Stop if:
 Required:
 
 - accepted PRD;
+- gate approval log entry or queued approval record;
 - stable requirement IDs;
 - acceptance criteria;
 - edge cases;
@@ -143,6 +177,7 @@ Required:
 
 - accepted architecture specification;
 - accepted or proposed technology stack decision;
+- gate approval log entry or queued approval record;
 - component ownership;
 - runtime and data model;
 - error and failure behavior;
@@ -172,6 +207,7 @@ Stop if:
 Required:
 
 - accepted governance/security specification;
+- gate approval log entry or queued approval record;
 - identity model;
 - authorization rules;
 - approval model;
@@ -212,6 +248,7 @@ Required:
 - accepted tactical implementation plan;
 - accepted test/UAT plan or embedded equivalent;
 - accepted construction directive;
+- gate approval log entry or queued approval record;
 - implementation completed within scope;
 - verification run or skipped with reason.
 
@@ -244,7 +281,8 @@ Required:
 - remediation plan or summary, if findings exist;
 - tests and UAT evidence;
 - residual risk statement;
-- updated traceability evidence.
+- updated traceability evidence;
+- gate approval log entry or queued approval record.
 
 Review questions:
 

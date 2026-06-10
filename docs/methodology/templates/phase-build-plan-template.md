@@ -1,6 +1,6 @@
 # Phase Build Plan: [Project Name] — Phase [N]: [Phase Name]
 
-Status: Draft | Accepted | Superseded
+Status: Draft | Ready for Review | Ready for Approval | Accepted | Superseded
 Date:
 Owner:
 Authority: `docs/methodology/constitution/gendev.md` — Phase Build Plan

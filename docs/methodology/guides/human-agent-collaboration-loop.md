@@ -137,11 +137,14 @@ Approved by:
 Date:
 Scope approved:
 Known risks accepted:
+Open questions carried forward:
 Next gate:
+Next role:
+Next artifact:
 ```
 
-Approval may be recorded in the artifact, gate log, or another active project document. The manifest
-should carry a summary state.
+Gate approval should be recorded in `docs/project/approvals/gate-log.md`. It may also be recorded
+in the approved artifact. The manifest should carry the current gate summary state.
 
 ## Step 7: Record
 
@@ -151,6 +154,7 @@ Record updates may include:
 
 - artifact status;
 - `docs/project/project.yaml` gate and approval summary;
+- `docs/project/approvals/gate-log.md` approval record;
 - traceability matrix;
 - decision record;
 - deferred item list;

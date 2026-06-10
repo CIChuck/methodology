@@ -41,8 +41,9 @@ Use operating guides from `docs/methodology/guides/`:
 - `subagent-coordination-protocol.md`
 - `artifact-collaboration-protocol.md`
 - `production-operations-protocol.md`
+- `orchestration-validation.md`
 
-Use role playbooks from `docs/methodology/Agents/roles/` when a task maps to a specific lifecycle
+Use role playbooks from `docs/methodology/agents/roles/` when a task maps to a specific lifecycle
 role.
 
 ## Orchestration Behavior
@@ -65,12 +66,17 @@ For short prompts such as `Let's begin`, `What's next?`, `Continue`, `Proceed`, 
 When coordinating sub-agents, follow `docs/methodology/guides/subagent-coordination-protocol.md`.
 Sub-agent output is advisory until accepted into active project documents or approval records.
 
+Use `docs/project/project.yaml` as the active project control-plane summary and
+`docs/project/approvals/gate-log.md` as the durable approval history. Do not treat a gate as
+approved unless the required approver, approval date, evidence, and risk disposition are recorded.
+
 ## Active Project Paths
 
 For an initialized product, active authority belongs under `docs/project/`:
 
 ```text
 docs/project/vision/
+docs/project/approvals/
 docs/project/prd/
 docs/project/architecture/
 docs/project/security-governance/

@@ -38,7 +38,8 @@ Use this guide with:
 - `docs/methodology/guides/human-approval-protocol.md`;
 - `docs/methodology/guides/subagent-coordination-protocol.md`;
 - `docs/methodology/guides/artifact-collaboration-protocol.md`;
-- `docs/methodology/guides/production-operations-protocol.md`.
+- `docs/methodology/guides/production-operations-protocol.md`;
+- `docs/methodology/guides/orchestration-validation.md`.
 
 The workflow defines the lifecycle. The orchestration guides define how humans, lead agents, and
 sub-agents collaborate inside that lifecycle.
@@ -82,7 +83,7 @@ Initialization creates:
 - the active project folder structure.
 
 After initialization, the human owner and agent should inspect `docs/project/project.yaml` and update
-owner, approver, status, and current gate fields.
+owner, required approver, status, current gate, evidence, risk, and next-handoff fields.
 
 The human should also set or confirm collaboration mode:
 

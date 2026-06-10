@@ -17,10 +17,38 @@ under what scope.
 - Approval is a human control point.
 - Approval should be recorded in Markdown.
 - `project.yaml` should summarize current approval state.
+- `docs/project/approvals/gate-log.md` should preserve gate approval history.
 - Chat approval should be copied into durable project docs when it affects scope, risk, or gate
   movement.
 - Approval of one artifact does not approve unrelated future work.
 - Accepted risk must be visible.
+
+## Approval State Values
+
+Use these values for gate approval state in `docs/project/project.yaml`:
+
+```text
+pending
+drafting
+ready_for_review
+ready_for_approval
+approved
+blocked
+superseded
+```
+
+Use these values for major artifact status when applicable:
+
+```text
+Draft
+Ready for Review
+Ready for Approval
+Accepted
+Superseded
+```
+
+Reports and close-out artifacts may use `Complete` instead of `Accepted` when they record evidence
+rather than define planning authority.
 
 ## Standard Approval Record
 
@@ -108,10 +136,28 @@ Evidence reviewed:
 Known risks accepted:
 Next role:
 Next artifact:
+Manifest updated:
 ```
 
-Gate approval may be recorded in a gate log if the active project creates one. If not, it may be
-recorded in the approved artifact.
+Gate approval should be recorded in `docs/project/approvals/gate-log.md`. It may also be recorded
+in the approved artifact. `project.yaml` must summarize the latest gate state.
+
+Before asking for gate approval, the lead agent should present:
+
+```text
+Gate:
+Artifact status:
+Evidence reviewed:
+Open questions:
+Known risks:
+Risks requiring acceptance:
+Proposed next gate:
+Proposed next role:
+Manifest updates to record:
+```
+
+The agent should not interpret a casual `proceed` as gate approval unless the gate, approver,
+evidence, and risk disposition are unambiguous and can be recorded.
 
 ## Review Finding Acceptance
 
@@ -172,16 +218,36 @@ approvals:
   current_gate:
     gate: G1
     status: pending
+    required_approver: TBD
     approved_by: TBD
     approved_on: TBD
-    evidence: TBD
+    evidence:
+      - docs/project/vision/[project-slug]-vision.md
+    risks_accepted:
+      - TBD
+    blocking_open_questions:
+      - TBD
+    next_gate: G2
+    next_role: prd-agent
+    next_artifact: docs/project/prd/[project-slug]-prd.md
   latest_decision:
     decision: TBD
-    approved_by: TBD
-    approved_on: TBD
+    decided_by: TBD
+    decided_on: TBD
+    record: docs/project/approvals/gate-log.md
 ```
 
 The manifest summarizes state. The detailed record belongs in Markdown artifacts.
+
+Rules:
+
+- Do not set gate status to `ready_for_approval` while required approver, evidence, or risk
+  disposition is unknown.
+- Do not set gate status to `approved` unless `approved_by`, `approved_on`, evidence, and risk
+  disposition are recorded.
+- Use `N/A` with a short reason when there are no risks to accept or no open questions to carry
+  forward.
+- Keep `next_gate`, `next_role`, and `next_artifact` current so a future agent can resume.
 
 ## Approval Language In Conversation
 
